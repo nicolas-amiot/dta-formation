@@ -88,8 +88,8 @@ public class PizzeriaAdminConsoleApp {
 					j++;
 				}
 				boolean fini = false;
-				int index = 0;
 				while(!fini){
+					int index = 0;
 					System.out.println("Veuillez choisir la pizza à modifier (stop pour abandonner).");
 					String codeChoisi = sc.next();
 					if(!codeChoisi.equals("stop")){
@@ -139,10 +139,10 @@ public class PizzeriaAdminConsoleApp {
 					k++;
 				}
 				boolean termine = false;
-				int compteur = 0;
 				while(!termine){
 					System.out.println("Veuillez choisir la pizza à supprimer (stop pour abandonner).");
 					String codeVoulu = sc.next();
+					int compteur = 0;
 					if(!codeVoulu.equals("stop")){
 						while(compteur < nbPizza && !termine){
 							if(codeVoulu.equals(codePizza[compteur])){

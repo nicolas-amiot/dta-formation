@@ -1,39 +1,34 @@
 package fr.pizzeria.console;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
+import fr.pizzeria.modele.Pizza;
+
 public class PizzeriaAdminConsoleApp {
+	
+	private static final int MAX_PIZZA = 100;
 
 	public static void main(String[] args) {
-		int nbPizzaMax = 100;
-		String codePizza[] = new String[nbPizzaMax];
-		String nomPizza[] = new String[nbPizzaMax];
-		float prixPizza[] = new float[nbPizzaMax];
-		codePizza[0] = "PEP";
-		nomPizza[0] = "Pépéroni";
-		prixPizza[0] = 12.50F;
-		codePizza[1] = "MAR";
-		nomPizza[1] = "Margherita";
-		prixPizza[1] = 14.00F;
-		codePizza[2] = "REI";
-		nomPizza[2] = "La Reine";
-		prixPizza[2] = 11.50F;
-		codePizza[3] = "FRO";
-		nomPizza[3] = "La 4 fromages";
-		prixPizza[3] = 12.00F;
-		codePizza[4] = "CAN";
-		nomPizza[4] = "La cannibale";
-		prixPizza[4] = 12.50F;
-		codePizza[5] = "SAV";
-		nomPizza[5] = "La savoyarde";
-		prixPizza[5] = 13.00F;
-		codePizza[6] = "ORI";
-		nomPizza[6] = "L’orientale";
-		prixPizza[6] = 13.50F;
-		codePizza[7] = "IND";
-		nomPizza[7] = "L’indienne";
-		prixPizza[7] = 14.00F;
-		int nbPizza = 8;
+		Pizza[] pizzas = new Pizza[MAX_PIZZA];
+		pizzas[0] = new Pizza(0, "PEP", "Pépéroni", 12.50F);
+		Pizza.nbPizzas++;
+		pizzas[1] = new Pizza(1, "MAR", "Margherita", 14.00F);
+		Pizza.nbPizzas++;
+		pizzas[2] = new Pizza(2, "REI", "La Reine", 11.50F);
+		Pizza.nbPizzas++;
+		pizzas[3] = new Pizza(3, "FRO", "La 4 fromages", 12.00F);
+		Pizza.nbPizzas++;
+		pizzas[4] = new Pizza(4, "CAN", "La cannibale", 12.50F);
+		Pizza.nbPizzas++;
+		pizzas[5] = new Pizza(5, "SAV", "La savoyarde", 13.00F);
+		Pizza.nbPizzas++;
+		pizzas[6] = new Pizza(6, "ORI", "L’orientale", 13.50F);
+		Pizza.nbPizzas++;
+		pizzas[7] = new Pizza(7, "IND", "L’indienne", 14.00F);
+		Pizza.nbPizzas++;
+		
 		int choix;
 		Scanner sc = new Scanner(System.in);
 		do {
@@ -47,13 +42,13 @@ public class PizzeriaAdminConsoleApp {
 			switch(choix){
 			case 1:
 				int i = 0;
-				while(codePizza[i] != null){
-					System.out.println(codePizza[i] + " -> " + nomPizza[i] + " (" + prixPizza[i] + " €)");
+				while(pizzas[i] != null){
+					System.out.println(pizzas[i].code + " -> " + pizzas[i].nom + " (" + pizzas[i].prix + " €)");
 					i++;
 				}
 				break;
 			case 2:
-				if(nbPizza < 100){
+				if(Pizza.nbPizzas < MAX_PIZZA){
 					boolean codeDispo = true;
 					do{
 						System.out.println("Veuillez saisir le code");
@@ -61,30 +56,29 @@ public class PizzeriaAdminConsoleApp {
 						System.out.println("Veuillez saisir le nom (sans espace)");
 						String nom = sc.next();
 						System.out.println("Veuillez saisir le prix");
-						float prix = sc.nextFloat();
-						for(int m = 0; m < nbPizza; m++){
-							if(code.equals(codePizza[m])){
+						double prix = sc.nextDouble();
+						for(int m = 0; m < Pizza.nbPizzas; m++){
+							if(code.equals(pizzas[m].code)){
 								codeDispo = false;
-								m = nbPizza;
+								m = Pizza.nbPizzas;
 							}
 						}
 						if(codeDispo){
-							codePizza[nbPizza] = code;
-							nomPizza[nbPizza] = nom;
-							prixPizza[nbPizza] = prix;
-							nbPizza++;
+							Pizza pizza = new Pizza(Pizza.nbPizzas, code, nom, prix);
+							pizzas[Pizza.nbPizzas] = pizza;
+							Pizza.nbPizzas++;
 						} else {
 							System.out.println("Le code " + code + " n'est pas disponible");
 						}
 					} while(!codeDispo);
 				} else {
-					System.out.println("La limite de" + nbPizzaMax + " a été atteinte.");
+					System.out.println("La limite de" + MAX_PIZZA + " a été atteinte.");
 				}
 				break;
 			case 3:
 				int j = 0;
-				while(codePizza[j] != null){
-					System.out.println(codePizza[j] + " -> " + nomPizza[j] + " (" + prixPizza[j] + " €)");
+				while(pizzas[j] != null){
+					System.out.println(pizzas[j].code + " -> " + pizzas[j].nom + " (" + pizzas[j].prix + " €)");
 					j++;
 				}
 				boolean fini = false;
@@ -93,8 +87,8 @@ public class PizzeriaAdminConsoleApp {
 					System.out.println("Veuillez choisir la pizza à modifier (stop pour abandonner).");
 					String codeChoisi = sc.next();
 					if(!codeChoisi.equals("stop")){
-						while(index < nbPizza && !fini){
-							if(codeChoisi.equals(codePizza[index])){
+						while(index < Pizza.nbPizzas && !fini){
+							if(codeChoisi.equals(pizzas[index].code)){
 								fini = true;
 							} else {
 								index++;
@@ -108,18 +102,17 @@ public class PizzeriaAdminConsoleApp {
 								System.out.println("Veuillez saisir le nom (sans espace)");
 								String newNom = sc.next();
 								System.out.println("Veuillez saisir le prix");
-								float newPrix = sc.nextFloat();
+								double newPrix = sc.nextDouble();
 								codeDisponible = true;
-								for(int n = 0; n < nbPizza; n++){
-									if(newCode.equals(codePizza[n]) && n != index){
+								for(int n = 0; n < Pizza.nbPizzas; n++){
+									if(newCode.equals(pizzas[n].code) && n != index){
 										codeDisponible = false;
-										n = nbPizza;
+										n = Pizza.nbPizzas;
 									}
 								}
 								if(codeDisponible){
-									codePizza[index] = newCode;
-									nomPizza[index] = newNom;
-									prixPizza[index] = newPrix;
+									Pizza pizza = new Pizza(Pizza.nbPizzas, newCode, newNom, newPrix);
+									pizzas[index] = pizza;
 								} else {
 									System.out.println("Le code " + newCode + " n'est pas disponible");
 								}
@@ -134,8 +127,8 @@ public class PizzeriaAdminConsoleApp {
 				break;
 			case 4:
 				int k = 0;
-				while(codePizza[k] != null){
-					System.out.println(codePizza[k] + " -> " + nomPizza[k] + " (" + prixPizza[k] + " €)");
+				while(pizzas[k] != null){
+					System.out.println(pizzas[k].code + " -> " + pizzas[k].nom + " (" + pizzas[k].prix + " €)");
 					k++;
 				}
 				boolean termine = false;
@@ -144,24 +137,20 @@ public class PizzeriaAdminConsoleApp {
 					String codeVoulu = sc.next();
 					int compteur = 0;
 					if(!codeVoulu.equals("stop")){
-						while(compteur < nbPizza && !termine){
-							if(codeVoulu.equals(codePizza[compteur])){
+						while(compteur < Pizza.nbPizzas && !termine){
+							if(codeVoulu.equals(pizzas[compteur].code)){
 								termine = true;
 							} else {
 								compteur++;
 							}
 						}
 						if(termine){
-							nbPizza--;
-							while(compteur < nbPizza){
-								codePizza[compteur] = codePizza[compteur+1];
-								nomPizza[compteur] = nomPizza[compteur+1];
-								prixPizza[compteur] = prixPizza[compteur+1];
+							while(compteur < Pizza.nbPizzas-1){
+								pizzas[compteur] = pizzas[compteur+1];
 								compteur++;
 							}
-							codePizza[nbPizza] = null;
-							nomPizza[nbPizza] = null;
-							prixPizza[nbPizza] = 0;
+							pizzas[Pizza.nbPizzas-1] = null;
+							Pizza.nbPizzas--;
 						} else {
 							System.out.println("Cette pizza n'existe pas.");
 						}

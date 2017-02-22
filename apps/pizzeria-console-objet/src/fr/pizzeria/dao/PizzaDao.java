@@ -6,7 +6,7 @@ public interface PizzaDao {
 	
 	Pizza[] findAllPizzas();
 	boolean saveNewPizza(Pizza pizza);
-	boolean updatePizza(String codePizza, Pizza pizza);
-	boolean deletePizza(String codePizza);
+	boolean updatePizza(int idPizza, Pizza pizza);
+	boolean deletePizza(int idPizza);
 
 }

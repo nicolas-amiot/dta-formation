@@ -23,23 +23,32 @@ public class PizzaDaoImpl implements PizzaDao {
 
 	@Override
 	public boolean saveNewPizza(Pizza pizza) {
-		Pizza[] newPizzas = new Pizza[Pizza.nbPizzas];
-		System.arraycopy(pizzas, 0, newPizzas, 0, Pizza.nbPizzas);
-		newPizzas[Pizza.nbPizzas] = pizza;
+		Pizza[] newPizzas = new Pizza[pizzas.length+1];
+		System.arraycopy(pizzas, 0, newPizzas, 0, pizzas.length);
+		newPizzas[pizzas.length] = pizza;
 		pizzas = newPizzas;
+		Pizza.nbPizzas++;
 		return true;
 	}
 
 	@Override
-	public boolean updatePizza(String codePizza, Pizza pizza) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean updatePizza(int idPizza, Pizza pizza) {
+		pizzas[idPizza] = pizza;
+		return true;
 	}
 
 	@Override
-	public boolean deletePizza(String codePizza) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean deletePizza(int idPizza) {
+		Pizza[] newPizzas = new Pizza[pizzas.length-1];
+		for(int i = 0; i < idPizza; i++){
+			newPizzas[i] = pizzas[i];
+		}
+		while(idPizza < pizzas.length-1){
+			newPizzas[idPizza] = pizzas[idPizza+1];
+			idPizza++;
+		}
+		pizzas = newPizzas;
+		return true;
 	}
 
 }

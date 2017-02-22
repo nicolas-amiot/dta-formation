@@ -1,9 +1,6 @@
 package fr.pizzeria.console;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
-
 import fr.pizzeria.modele.Pizza;
 
 public class PizzeriaAdminConsoleApp {
@@ -28,6 +25,7 @@ public class PizzeriaAdminConsoleApp {
 		Pizza.nbPizzas++;
 		pizzas[7] = new Pizza(7, "IND", "L’indienne", 14.00F);
 		Pizza.nbPizzas++;
+		int nbPizzas = 8;
 		
 		int choix;
 		Scanner sc = new Scanner(System.in);
@@ -46,9 +44,10 @@ public class PizzeriaAdminConsoleApp {
 					System.out.println(pizzas[i].code + " -> " + pizzas[i].nom + " (" + pizzas[i].prix + " €)");
 					i++;
 				}
+				System.out.println("-> " + Pizza.nbPizzas + " pizzas créées depuis l'initialisation du programme");
 				break;
 			case 2:
-				if(Pizza.nbPizzas < MAX_PIZZA){
+				if(nbPizzas < MAX_PIZZA){
 					boolean codeDispo = true;
 					do{
 						System.out.println("Veuillez saisir le code");
@@ -57,16 +56,17 @@ public class PizzeriaAdminConsoleApp {
 						String nom = sc.next();
 						System.out.println("Veuillez saisir le prix");
 						double prix = sc.nextDouble();
-						for(int m = 0; m < Pizza.nbPizzas; m++){
+						for(int m = 0; m < nbPizzas; m++){
 							if(code.equals(pizzas[m].code)){
 								codeDispo = false;
-								m = Pizza.nbPizzas;
+								m = nbPizzas;
 							}
 						}
 						if(codeDispo){
-							Pizza pizza = new Pizza(Pizza.nbPizzas, code, nom, prix);
-							pizzas[Pizza.nbPizzas] = pizza;
+							Pizza pizza = new Pizza(nbPizzas, code, nom, prix);
+							pizzas[nbPizzas] = pizza;
 							Pizza.nbPizzas++;
+							nbPizzas++;
 						} else {
 							System.out.println("Le code " + code + " n'est pas disponible");
 						}
@@ -87,7 +87,7 @@ public class PizzeriaAdminConsoleApp {
 					System.out.println("Veuillez choisir la pizza à modifier (stop pour abandonner).");
 					String codeChoisi = sc.next();
 					if(!codeChoisi.equals("stop")){
-						while(index < Pizza.nbPizzas && !fini){
+						while(index < nbPizzas && !fini){
 							if(codeChoisi.equals(pizzas[index].code)){
 								fini = true;
 							} else {
@@ -104,14 +104,14 @@ public class PizzeriaAdminConsoleApp {
 								System.out.println("Veuillez saisir le prix");
 								double newPrix = sc.nextDouble();
 								codeDisponible = true;
-								for(int n = 0; n < Pizza.nbPizzas; n++){
+								for(int n = 0; n < nbPizzas; n++){
 									if(newCode.equals(pizzas[n].code) && n != index){
 										codeDisponible = false;
-										n = Pizza.nbPizzas;
+										n = nbPizzas;
 									}
 								}
 								if(codeDisponible){
-									Pizza pizza = new Pizza(Pizza.nbPizzas, newCode, newNom, newPrix);
+									Pizza pizza = new Pizza(nbPizzas, newCode, newNom, newPrix);
 									pizzas[index] = pizza;
 								} else {
 									System.out.println("Le code " + newCode + " n'est pas disponible");
@@ -137,7 +137,7 @@ public class PizzeriaAdminConsoleApp {
 					String codeVoulu = sc.next();
 					int compteur = 0;
 					if(!codeVoulu.equals("stop")){
-						while(compteur < Pizza.nbPizzas && !termine){
+						while(compteur < nbPizzas && !termine){
 							if(codeVoulu.equals(pizzas[compteur].code)){
 								termine = true;
 							} else {
@@ -145,12 +145,12 @@ public class PizzeriaAdminConsoleApp {
 							}
 						}
 						if(termine){
-							while(compteur < Pizza.nbPizzas-1){
+							while(compteur < nbPizzas-1){
 								pizzas[compteur] = pizzas[compteur+1];
 								compteur++;
 							}
-							pizzas[Pizza.nbPizzas-1] = null;
-							Pizza.nbPizzas--;
+							pizzas[nbPizzas-1] = null;
+							nbPizzas--;
 						} else {
 							System.out.println("Cette pizza n'existe pas.");
 						}

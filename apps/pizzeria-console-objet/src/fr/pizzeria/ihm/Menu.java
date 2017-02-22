@@ -13,7 +13,7 @@ public class Menu {
 	public void afficher() {
 		System.out.println(titre);
 		for(OptionMenu optionMenu : actions){
-			System.out.println(optionMenu.getLibelle());
+			System.out.println(optionMenu.getId() + ". " + optionMenu.getLibelle());
 		}
 	}
 

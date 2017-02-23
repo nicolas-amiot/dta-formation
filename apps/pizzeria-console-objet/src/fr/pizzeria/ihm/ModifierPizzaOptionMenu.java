@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import fr.pizzeria.dao.PizzaDao;
 import fr.pizzeria.dao.PizzaDaoImpl;
+import fr.pizzeria.exception.PizzaException;
 import fr.pizzeria.modele.Pizza;
 
 public class ModifierPizzaOptionMenu extends OptionMenu {
@@ -52,7 +53,12 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 						}
 						if(codeDispo){
 							Pizza pizza = new Pizza(pizzas.length, code, nom, prix);
-							execute = pizzaDao.updatePizza(index, pizza);
+							try {
+								pizzaDao.updatePizza(index, pizza);
+								execute = true;
+							} catch (PizzaException e) {
+								e.printStackTrace();
+							}
 						} else {
 							System.out.println("Le code " + code + " n'est pas disponible");
 						}

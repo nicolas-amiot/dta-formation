@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import fr.pizzeria.dao.PizzaDao;
 import fr.pizzeria.dao.PizzaDaoImpl;
+import fr.pizzeria.exception.PizzaException;
 import fr.pizzeria.modele.Pizza;
 
 public class SupprimerPizzaOptionMenu  extends OptionMenu {
@@ -35,7 +36,12 @@ public class SupprimerPizzaOptionMenu  extends OptionMenu {
 					}
 				}
 				if(fini){
-					execute = pizzaDao.deletePizza(index);
+					try {
+						pizzaDao.deletePizza(index);
+						execute = true;
+					} catch (PizzaException e) {
+						e.printStackTrace();
+					}
 				} else {
 					System.out.println("Cette pizza n'existe pas.");
 				}

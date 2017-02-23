@@ -1,5 +1,6 @@
 package fr.pizzeria.dao;
 
+import fr.pizzeria.exception.*;
 import fr.pizzeria.modele.Pizza;
 
 public class PizzaDaoImpl implements PizzaDao {
@@ -22,33 +23,54 @@ public class PizzaDaoImpl implements PizzaDao {
 	}
 
 	@Override
-	public boolean saveNewPizza(Pizza pizza) {
-		Pizza[] newPizzas = new Pizza[pizzas.length+1];
-		System.arraycopy(pizzas, 0, newPizzas, 0, pizzas.length);
-		newPizzas[pizzas.length] = pizza;
-		pizzas = newPizzas;
-		Pizza.nbPizzas++;
-		return true;
+	public void saveNewPizza(Pizza pizza) throws PizzaException {
+		try{
+			Pizza[] newPizzas = new Pizza[pizzas.length+1];
+			System.arraycopy(pizzas, 0, newPizzas, 0, pizzas.length);
+			newPizzas[pizzas.length] = pizza;
+			pizzas = newPizzas;
+			Pizza.nbPizzas++;
+		} catch (Exception e1) {
+			try {
+				throw new SavePizzaException(e1);
+			} catch (SavePizzaException e2) {
+				throw new PizzaException(e2.getMessage(), e2);
+			}
+		}
 	}
 
 	@Override
-	public boolean updatePizza(int idPizza, Pizza pizza) {
-		pizzas[idPizza] = pizza;
-		return true;
+	public void updatePizza(int idPizza, Pizza pizza) throws PizzaException {
+		try {
+			pizzas[idPizza] = pizza;
+		} catch (Exception e1) {
+			try {
+				throw new UpdatePizzaException(e1);
+			} catch (UpdatePizzaException e2) {
+				throw new PizzaException(e2.getMessage(), e2);
+			}
+		}
 	}
 
 	@Override
-	public boolean deletePizza(int idPizza) {
-		Pizza[] newPizzas = new Pizza[pizzas.length-1];
-		for(int i = 0; i < idPizza; i++){
-			newPizzas[i] = pizzas[i];
+	public void deletePizza(int idPizza) throws PizzaException {
+		try {
+			Pizza[] newPizzas = new Pizza[pizzas.length-1];
+			for(int i = 0; i < idPizza; i++){
+				newPizzas[i] = pizzas[i];
+			}
+			while(idPizza < pizzas.length-1){
+				newPizzas[idPizza] = pizzas[idPizza+1];
+				idPizza++;
+			}
+			pizzas = newPizzas;
+		} catch (Exception e1) {
+			try {
+				throw new DeletePizzaException(e1);
+			} catch (DeletePizzaException e2) {
+				throw new PizzaException(e2.getMessage(), e2);
+			}
 		}
-		while(idPizza < pizzas.length-1){
-			newPizzas[idPizza] = pizzas[idPizza+1];
-			idPizza++;
-		}
-		pizzas = newPizzas;
-		return true;
 	}
 
 }

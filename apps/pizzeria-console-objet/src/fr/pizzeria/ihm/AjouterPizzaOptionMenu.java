@@ -1,6 +1,7 @@
 package fr.pizzeria.ihm;
 
 import java.util.Scanner;
+import fr.pizzeria.exception.*;
 
 import fr.pizzeria.dao.PizzaDao;
 import fr.pizzeria.dao.PizzaDaoImpl;
@@ -34,7 +35,12 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 			}
 			if(codeDispo){
 				Pizza pizza = new Pizza(pizzas.length, code, nom, prix);
-				execute =  pizzaDao.saveNewPizza(pizza);
+				try{
+					pizzaDao.saveNewPizza(pizza);
+					execute =  true;
+				} catch (PizzaException e) {
+					e.printStackTrace();
+				}
 			} else {
 				System.out.println("Le code " + code + " n'est pas disponible");
 			}

@@ -1,9 +1,9 @@
 package fr.pizzeria.exception;
 
-public class DeletePizzaException extends Exception {
+public class DeletePizzaException extends PizzaException {
 	
-	public DeletePizzaException(Throwable cause) {
-		super("Erreur sur la suppression de la pizza.", cause);
+	public DeletePizzaException(String message) {
+		super(message);
 	}
 
 }

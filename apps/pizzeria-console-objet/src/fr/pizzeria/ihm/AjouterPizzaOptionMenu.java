@@ -39,7 +39,7 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 					pizzaDao.saveNewPizza(pizza);
 					execute =  true;
 				} catch (PizzaException e) {
-					e.printStackTrace();
+					System.out.println(e.getMessage());
 				}
 			} else {
 				System.out.println("Le code " + code + " n'est pas disponible");

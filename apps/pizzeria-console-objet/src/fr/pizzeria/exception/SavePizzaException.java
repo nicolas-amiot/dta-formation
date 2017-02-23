@@ -1,9 +1,9 @@
 package fr.pizzeria.exception;
 
-public class SavePizzaException extends Exception {
+public class SavePizzaException extends PizzaException {
 
-	public SavePizzaException(Throwable cause) {
-		super("Erreur sur la sauvegarde de la pizza.", cause);
+	public SavePizzaException(String message) {
+		super(message);
 	}
 
 }

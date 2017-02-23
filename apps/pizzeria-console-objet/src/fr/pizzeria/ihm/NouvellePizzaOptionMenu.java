@@ -15,8 +15,7 @@ public class NouvellePizzaOptionMenu extends OptionMenu {
 	}
 
 	@Override
-	public boolean execute() {
-		Scanner sc = new Scanner(System.in);
+	public boolean execute(Scanner sc) {
 		Pizza[] pizzas = pizzaDao.findAllPizzas();
 		boolean codeDispo = true;
 		do{

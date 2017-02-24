@@ -17,7 +17,7 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 	public boolean execute(IhmTools ihmTools) {
 		List<Pizza> pizzas = ihmTools.getPizzaDao().findAllPizzas();
 		for(Pizza pizza : pizzas){
-			System.out.println(pizza.getCode() + " -> " + pizza.getNom() + " [" + pizza.getCategorie().getLibelle() + "] (" + pizza.getPrix() + " €)");
+			System.out.println(pizza.toString());
 		}
 		boolean fini = false;
 		while(!fini){

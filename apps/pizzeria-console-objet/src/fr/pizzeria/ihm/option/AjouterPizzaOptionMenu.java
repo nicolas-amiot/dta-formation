@@ -12,7 +12,6 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 
 	@Override
 	public boolean execute(IhmTools ihmTools) {
-		boolean execute = false;
 		Pizza[] pizzas = ihmTools.getPizzaDao().findAllPizzas();
 		boolean codeDispo = true;
 		do{
@@ -32,7 +31,6 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 				Pizza pizza = new Pizza(pizzas.length, code, nom, prix);
 				try{
 					ihmTools.getPizzaDao().save(pizza);
-					execute =  true;
 				} catch (DaoException e) {
 					System.out.println(e.getMessage());
 				}
@@ -40,7 +38,7 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 				System.out.println("Le code " + code + " n'est pas disponible");
 			}
 		} while(!codeDispo);
-		return execute;
+		return false;
 	}
 
 }

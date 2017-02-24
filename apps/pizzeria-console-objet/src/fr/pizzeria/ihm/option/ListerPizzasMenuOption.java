@@ -16,7 +16,7 @@ public class ListerPizzasMenuOption extends OptionMenu {
 			System.out.println(pizza.getCode() + " -> " + pizza.getNom() + " (" + pizza.getPrix() + " €)");
 		}
 		System.out.println("-> " + Pizza.nbPizzas + " pizzas créées depuis l'initialisation du programme");
-		return true;
+		return false;
 	}
 
 }

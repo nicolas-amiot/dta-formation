@@ -12,7 +12,6 @@ public class SupprimerPizzaOptionMenu  extends OptionMenu {
 
 	@Override
 	public boolean execute(IhmTools ihmTools) {
-		boolean execute = false;
 		Pizza[] pizzas = ihmTools.getPizzaDao().findAllPizzas();
 		for(Pizza pizza : pizzas){
 			System.out.println(pizza.getCode() + " -> " + pizza.getNom() + " (" + pizza.getPrix() + " €)");
@@ -33,7 +32,6 @@ public class SupprimerPizzaOptionMenu  extends OptionMenu {
 				if(fini){
 					try {
 						ihmTools.getPizzaDao().delete(index);
-						execute = true;
 					} catch (DaoException e) {
 						System.out.println(e.getMessage());
 					}
@@ -44,7 +42,7 @@ public class SupprimerPizzaOptionMenu  extends OptionMenu {
 				fini = true;
 			}
 		}
-		return execute;
+		return false;
 	}
 
 }

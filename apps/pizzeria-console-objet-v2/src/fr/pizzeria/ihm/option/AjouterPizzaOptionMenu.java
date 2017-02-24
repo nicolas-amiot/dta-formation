@@ -4,6 +4,7 @@ import java.util.List;
 
 import fr.pizzeria.exception.*;
 import fr.pizzeria.ihm.tools.IhmTools;
+import fr.pizzeria.modele.CategoriePizza;
 import fr.pizzeria.modele.Pizza;
 
 public class AjouterPizzaOptionMenu extends OptionMenu {
@@ -14,7 +15,6 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 
 	@Override
 	public boolean execute(IhmTools ihmTools) {
-		boolean execute = false;
 		List<Pizza> pizzas = ihmTools.getPizzaDao().findAllPizzas();
 		boolean codeDispo = true;
 		do{
@@ -24,6 +24,12 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 			String nom = ihmTools.getScanner().next();
 			System.out.println("Veuillez saisir le prix");
 			double prix = ihmTools.getScanner().nextDouble();
+			System.out.println("Veuillez saisir la catégorie");
+			for(CategoriePizza cat : CategoriePizza.values()){
+				System.out.print(cat+" ");
+			}
+			System.out.print("\n");
+			CategoriePizza categorie = CategoriePizza.valueOf(ihmTools.getScanner().next().toUpperCase());
 			for(int i = 0; i < pizzas.size(); i++){
 				if(code.equals(pizzas.get(i).getCode())){
 					codeDispo = false;
@@ -31,10 +37,9 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 				}
 			}
 			if(codeDispo){
-				Pizza pizza = new Pizza(pizzas.size(), code, nom, prix);
+				Pizza pizza = new Pizza(pizzas.size(), code, nom, prix, categorie);
 				try{
 					ihmTools.getPizzaDao().save(pizza);
-					execute =  true;
 				} catch (DaoException e) {
 					System.out.println(e.getMessage());
 				}
@@ -42,7 +47,7 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 				System.out.println("Le code " + code + " n'est pas disponible");
 			}
 		} while(!codeDispo);
-		return execute;
+		return false;
 	}
 
 }

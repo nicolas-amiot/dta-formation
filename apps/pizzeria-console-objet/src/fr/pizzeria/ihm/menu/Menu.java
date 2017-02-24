@@ -24,15 +24,16 @@ public class Menu {
 	
 	public void demmarer(){
 		int choix;
+		boolean termine = false;
 		do {
 			this.afficher();
 			choix = ihmTools.getScanner().nextInt();
 			for(OptionMenu optionMenu : actions){
 				if(choix == optionMenu.getId()){
-					optionMenu.execute(ihmTools);
+					termine = optionMenu.execute(ihmTools);
 				}
 			}
-		} while(choix != actions[4].getId());
+		} while(!termine);
 	}
 
 }

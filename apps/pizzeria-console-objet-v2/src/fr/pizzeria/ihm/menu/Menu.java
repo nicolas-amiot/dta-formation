@@ -27,14 +27,15 @@ public class Menu {
 	
 	public void demmarer(){
 		int choix;
+		boolean termine = false;
 		do {
 			this.afficher();
 			choix = ihmTools.getScanner().nextInt();
 			OptionMenu action = actions.get(choix);
 			if(action != null){
-				action.execute(ihmTools);
+				termine = action.execute(ihmTools);
 			}
-		} while(choix != 99);
+		} while(!termine);
 	}
 
 }

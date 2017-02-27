@@ -47,7 +47,7 @@ public abstract class OptionMenu {
 		Arrays.asList(CategoriePizza.values()).forEach(categorie -> System.out.print(categorie + " "));
 		System.out.print("\n");
 		CategoriePizza categorie = CategoriePizza.valueOf(sc.next().toUpperCase());
-		return new Pizza(nbPizza, code, nom, prix, categorie);
+		return new Pizza(code, nom, prix, categorie);
 	}
 
 }

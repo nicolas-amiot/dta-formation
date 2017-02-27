@@ -1,5 +1,6 @@
 package fr.pizzeria.ihm.option;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -22,9 +23,12 @@ public abstract class OptionMenu {
 	public abstract boolean execute(IhmTools ihmTools);
 	
 	public void afficherPizzas(List<Pizza> pizzas){
+		/*
 		for(Pizza pizza : pizzas){
-			System.out.println(pizza.toString());
+			System.out.println(pizza);
 		}
+		*/
+		pizzas.forEach(System.out::println);
 	}
 	
 	public Pizza saisirPizza(int nbPizza, Scanner sc){
@@ -35,9 +39,12 @@ public abstract class OptionMenu {
 		System.out.println("Veuillez saisir le prix");
 		double prix = sc.nextDouble();
 		System.out.println("Veuillez saisir la catégorie");
-		for(CategoriePizza cat : CategoriePizza.values()){
-			System.out.print(cat+" ");
+		/*
+		for(CategoriePizza categorie : CategoriePizza.values()){
+			System.out.print(categorie + " ");
 		}
+		*/
+		Arrays.asList(CategoriePizza.values()).forEach(categorie -> System.out.print(categorie + " "));
 		System.out.print("\n");
 		CategoriePizza categorie = CategoriePizza.valueOf(sc.next().toUpperCase());
 		return new Pizza(nbPizza, code, nom, prix, categorie);

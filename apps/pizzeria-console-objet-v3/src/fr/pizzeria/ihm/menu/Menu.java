@@ -18,7 +18,6 @@ public class Menu {
 		this.actions = actions;
 	}
 
-	
 	public void afficher() {
 		System.out.println(titre);
 		for(Entry<Integer, OptionMenu> entry : actions.entrySet()){

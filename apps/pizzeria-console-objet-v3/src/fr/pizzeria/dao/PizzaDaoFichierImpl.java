@@ -13,6 +13,7 @@ import java.util.stream.Stream;
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.exception.DeleteDaoException;
 import fr.pizzeria.exception.SaveDaoException;
+import fr.pizzeria.exception.UpdateDaoException;
 import fr.pizzeria.modele.CategoriePizza;
 import fr.pizzeria.modele.Pizza;
 
@@ -44,7 +45,7 @@ public class PizzaDaoFichierImpl implements Dao<Pizza, String> {
 	@Override
 	public void save(Pizza pizza) throws DaoException {
 		try {
-			Files.write(Paths.get(pizza.getCode(), ".txt"), pizza.toString().getBytes(), StandardOpenOption.CREATE_NEW);
+			Files.write(Paths.get("data", pizza.getCode()+".txt"), pizza.toFileString().getBytes(), StandardOpenOption.CREATE_NEW);
 		} catch (IOException e) {
 			throw new SaveDaoException(e.getMessage());
 		}
@@ -52,6 +53,12 @@ public class PizzaDaoFichierImpl implements Dao<Pizza, String> {
 
 	@Override
 	public void update(String codePizza, Pizza pizza) throws DaoException {
+		try {
+			delete(codePizza);
+			save(pizza);
+		} catch (DaoException e) {
+			throw new UpdateDaoException(e.getMessage());
+		}
 	}
 
 	@Override

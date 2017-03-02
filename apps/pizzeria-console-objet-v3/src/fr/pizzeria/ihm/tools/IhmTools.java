@@ -7,8 +7,7 @@ import fr.pizzeria.modele.Pizza;
 
 public class IhmTools {
 	
-	private Dao<Pizza, String> pizzaDao = new PizzaDaoImpl();
-	// private Dao<Pizza, String> pizzaDao = new PizzaDaoFichierImpl();
+	private Dao<Pizza, String> pizzaDao = new PizzaDaoFichierImpl();
 	private Scanner scanner = new Scanner(System.in);
 	
 	public Dao<Pizza, String> getPizzaDao() {

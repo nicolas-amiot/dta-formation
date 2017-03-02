@@ -72,4 +72,8 @@ public class Pizza {
 		return sb.toString();
 	}
 	
+	public String toFileString() {
+		return this.nom+";"+this.prix+";"+this.categorie.toString();
+	}
+	
 }

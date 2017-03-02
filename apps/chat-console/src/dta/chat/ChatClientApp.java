@@ -6,15 +6,18 @@ import dta.chat.exception.ChatClientException;
 import dta.chat.model.ChatConversationModel;
 import dta.chat.model.socket.ChatSocket;
 import dta.chat.model.socket.ChatSocketImpl;
+import dta.chat.model.socket.ChatSocketProxy;
 import dta.chat.view.console.ChatConsoleView;
 
 public class ChatClientApp {
+	
+	private final static String LOCAL = "localhost";
+	private final static String DISTANT = "192.168.99.31";
 
-	public static void main(String[] args) {
-
+	public static void main(String[] args) throws ChatClientException {
 		try (Scanner sc = new Scanner(System.in)) {
 			try {
-				ChatSocket client = new ChatSocketImpl("192.168.99.31", 1800);
+				ChatSocket client = new ChatSocketProxy(DISTANT, 1800);
 				ChatConversationModel model = new ChatConversationModel(client);
 				final ChatConsoleView view = new ChatConsoleView(sc);
 				view.setAuthController((login) -> {

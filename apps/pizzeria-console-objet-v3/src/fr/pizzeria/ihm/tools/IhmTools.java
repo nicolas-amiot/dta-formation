@@ -7,11 +7,11 @@ import fr.pizzeria.modele.Pizza;
 
 public class IhmTools {
 	
-	// private Dao<Pizza, Integer> pizzaDao = new PizzaDaoImpl();
-	private Dao<Pizza, Integer> pizzaDao = new PizzaDaoFichierImpl();
+	private Dao<Pizza, String> pizzaDao = new PizzaDaoImpl();
+	// private Dao<Pizza, String> pizzaDao = new PizzaDaoFichierImpl();
 	private Scanner scanner = new Scanner(System.in);
 	
-	public Dao<Pizza, Integer> getPizzaDao() {
+	public Dao<Pizza, String> getPizzaDao() {
 		return pizzaDao;
 	}
 	

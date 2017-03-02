@@ -31,7 +31,7 @@ public class SupprimerPizzaOptionMenu  extends OptionMenu {
 				}
 				if(fini){
 					try {
-						ihmTools.getPizzaDao().delete(index);
+						ihmTools.getPizzaDao().delete(codeChoisi);
 					} catch (DaoException e) {
 						System.out.println(e.getMessage());
 					}

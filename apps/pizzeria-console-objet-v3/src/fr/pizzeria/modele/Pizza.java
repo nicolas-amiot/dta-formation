@@ -16,7 +16,6 @@ public class Pizza {
 	public static int nbPizzas = 0;
 	
 	public Pizza(String code, String nom, double prix, CategoriePizza categorie) {
-
 		this.code = code;
 		this.nom = nom;
 		this.prix = prix;

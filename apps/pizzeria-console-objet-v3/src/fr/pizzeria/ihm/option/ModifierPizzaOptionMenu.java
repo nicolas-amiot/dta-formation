@@ -42,7 +42,7 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 						}
 						if(codeDispo){
 							try {
-								ihmTools.getPizzaDao().update(index, pizza);
+								ihmTools.getPizzaDao().update(codeChoisi, pizza);
 							} catch (DaoException e) {
 								System.out.println(e.getMessage());
 							}

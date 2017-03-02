@@ -2,6 +2,7 @@ package fr.pizzeria.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import fr.pizzeria.exception.*;
 import fr.pizzeria.modele.CategoriePizza;
@@ -42,12 +43,15 @@ public class PizzaDaoImpl implements Dao<Pizza, String> {
 		if(pizza.getCode().length() > 3){
 			throw new UpdateDaoException("L'identifiant doit être positif");
 		}
+		int index = IntStream.range(0, pizzas.size())
+        .filter(i -> pizzas.get(i).getCode().equals(codePizza))
+        .findFirst().getAsInt();
 		pizzas.set(index, pizza);
 	}
 
 	@Override
 	public void delete(String codePizza) throws DaoException {
-		if(pizza.getCode().length() > 3){
+		if(codePizza.length() > 3){
 			throw new DeleteDaoException("L'identifiant doit être positif");
 		}
 		pizzas.removeIf(p -> p.getCode().equals(codePizza));

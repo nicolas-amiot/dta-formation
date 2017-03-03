@@ -2,9 +2,11 @@ package fr.pizzeria.modele;
 
 import java.lang.reflect.Field;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 public class Pizza {
 	
-	private int id;
 	@ToString
 	private String code;
 	@ToString
@@ -20,10 +22,6 @@ public class Pizza {
 		this.nom = nom;
 		this.prix = prix;
 		this.categorie = categorie;
-	}
-
-	public int getId() {
-		return id;
 	}
 
 	public String getCode() {
@@ -74,6 +72,30 @@ public class Pizza {
 	
 	public String toFileString() {
 		return this.nom+";"+this.prix+";"+this.categorie.toString();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) { return false; }
+		   if (obj == this) { return true; }
+		   if (obj.getClass() != getClass()) {
+		     return false;
+		   }
+		   Pizza pizza = (Pizza) obj;
+		   return new EqualsBuilder()
+		                 .append(code, pizza.getCode())
+		                 .append(nom, pizza.getNom())
+		                 .append(categorie, pizza.getCategorie())
+		                 .isEquals();
+	}
+
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder(17, 37)
+			       .append(code)
+			       .append(nom)
+			       .append(categorie)
+			       .toHashCode();
 	}
 	
 }

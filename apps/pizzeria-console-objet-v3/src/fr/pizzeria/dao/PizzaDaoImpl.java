@@ -31,8 +31,8 @@ public class PizzaDaoImpl implements Dao<Pizza, String> {
 
 	@Override
 	public void save(Pizza pizza) throws DaoException {
-		if(pizza.getCode().length() > 3){
-			throw new SaveDaoException("Le code est trop long");
+		if(pizza.getCode().length() < 3){
+			throw new SaveDaoException("Le code est trop court");
 		}
 		pizzas.add(pizza);
 		Pizza.nbPizzas++;

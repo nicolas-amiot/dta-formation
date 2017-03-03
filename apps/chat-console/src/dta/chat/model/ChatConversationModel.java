@@ -2,15 +2,15 @@ package dta.chat.model;
 
 import dta.chat.exception.ChatClientException;
 import dta.chat.model.observer.ChatObservable;
-import dta.chat.model.socket.ChatSocket;
+import dta.chat.model.socket.Proxy;
 
 public class ChatConversationModel extends ChatObservable<ChatMessage> {
 	
 	private String login;
-	private ChatSocket socket;
+	private Proxy proxy;
 	
-	public ChatConversationModel(ChatSocket socket) {
-		this.socket = socket;
+	public ChatConversationModel(Proxy proxy) {
+		this.proxy = proxy;
 	}
 	
 	public void setLogin(String login) {
@@ -20,12 +20,12 @@ public class ChatConversationModel extends ChatObservable<ChatMessage> {
 
 	public void sendMessage(String msg) throws ChatClientException {
 		ChatMessage msg2 = new ChatMessage(login, msg);
-		socket.sendMessage(msg2);
+		proxy.sendMessage(msg2);
 		notifyObservers(msg2);
 	}
 
 	public ChatMessage readMessage() throws ChatClientException {
-		ChatMessage msg = socket.readMessage();
+		ChatMessage msg = proxy.readMessage();
 		notifyObservers(msg);
 		return msg;
 	}

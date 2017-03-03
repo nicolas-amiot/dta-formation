@@ -1,6 +1,7 @@
 package dta.chat.history;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -17,7 +18,8 @@ public class HistoryFacade {
 	public List<ChatMessage> findLastMessages() throws ChatClientException {
 		List<ChatMessage> messages = new ArrayList<>();
 		try(Stream<Path> files = Files.list(Paths.get("messages"))){
-			Object[] contenuFichier = Files.lines(Paths.get("messages", "DTA.txt")).toArray();
+			Charset cs = Charset.forName("Cp1252"); // "Cp1252" is Windows ANSI
+			Object[] contenuFichier = Files.lines(Paths.get("messages", "DTA.txt"), cs).toArray();
 			for(int i = 0; i < contenuFichier.length; i++){
 				String login = contenuFichier[i].toString().split(";")[0];
 				String text = contenuFichier[i].toString().split(";")[1];

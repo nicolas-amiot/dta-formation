@@ -4,9 +4,7 @@ import java.util.Scanner;
 
 import dta.chat.exception.ChatClientException;
 import dta.chat.model.ChatConversationModel;
-import dta.chat.model.socket.ChatSocket;
-import dta.chat.model.socket.ChatSocketImpl;
-import dta.chat.model.socket.ChatSocketProxy;
+import dta.chat.model.socket.Proxy;
 import dta.chat.view.console.ChatConsoleView;
 
 public class ChatClientApp {
@@ -17,8 +15,8 @@ public class ChatClientApp {
 	public static void main(String[] args) throws ChatClientException {
 		try (Scanner sc = new Scanner(System.in)) {
 			try {
-				ChatSocket client = new ChatSocketProxy(DISTANT, 1800);
-				ChatConversationModel model = new ChatConversationModel(client);
+				Proxy proxy = new Proxy(LOCAL, 1800);
+				ChatConversationModel model = new ChatConversationModel(proxy);
 				final ChatConsoleView view = new ChatConsoleView(sc);
 				view.setAuthController((login) -> {
 					model.setLogin(login);
@@ -48,7 +46,7 @@ public class ChatClientApp {
 					}
 				}
 				try {
-					client.close();
+					proxy.close();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

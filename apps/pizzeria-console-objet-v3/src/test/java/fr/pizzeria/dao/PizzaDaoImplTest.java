@@ -45,7 +45,7 @@ public class PizzaDaoImplTest {
 		Pizza pizza = new Pizza("TEST", "Test", 10.50, CategoriePizza.SANS_VIANDE);
 		pizzaDao.save(pizza);
 		List<Pizza> pizzas = pizzaDao.findAllPizzas();
-		assertThat(pizzas.size(), allOf(is(9), is(10))); // Privilegier asserThat que assertEquals
+		assertThat(pizzas.size(), allOf(is(9), is(10))); // Privilégier asserThat que assertEquals
 	}
 
 }

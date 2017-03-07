@@ -6,7 +6,7 @@
 	<artifactId>nicolas-pizzeria-app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>Pizzeria App</name>
+	<name>nicolas-pizzeria-app</name>
 	<description>Projet Parent</description>
 
 	<properties>

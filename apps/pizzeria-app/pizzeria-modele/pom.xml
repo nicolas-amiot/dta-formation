@@ -4,12 +4,12 @@
 	
 	<parent>
 		<groupId>fr.pizzeria</groupId>
-		<artifactId>pizzeria-app</artifactId>
+		<artifactId>nicolas-pizzeria-app</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../</relativePath>
 	</parent>
 	
-	<artifactId>pizzeria-modele</artifactId>
+	<artifactId>nicolas-pizzeria-modele</artifactId>
 
 	<dependencies>
 		<dependency>

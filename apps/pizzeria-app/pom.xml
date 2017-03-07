@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>fr.pizzeria</groupId>
-	<artifactId>pizzeria-app</artifactId>
+	<artifactId>nicolas-pizzeria-app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Pizzeria App</name>
@@ -64,12 +64,12 @@
 			</dependency>
 			<dependency>
 				<groupId>${project.groupId}</groupId>
-				<artifactId>pizzeria-modele</artifactId>
+				<artifactId>nicolas-pizzeria-modele</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>${project.groupId}</groupId>
-				<artifactId>pizzeria-dao</artifactId>
+				<artifactId>nicolas-pizzeria-dao</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 		</dependencies>

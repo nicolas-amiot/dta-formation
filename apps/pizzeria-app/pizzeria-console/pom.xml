@@ -4,12 +4,12 @@
 
 	<parent>
 		<groupId>fr.pizzeria</groupId>
-		<artifactId>pizzeria-app</artifactId>
+		<artifactId>nicolas-pizzeria-app</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../</relativePath>
 	</parent>
 
-	<artifactId>pizzeria-console</artifactId>
+	<artifactId>nicolas-pizzeria-console</artifactId>
 
 	<build>
 		<resources>
@@ -49,11 +49,11 @@
 	<dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>pizzeria-modele</artifactId>
+			<artifactId>nicolas-pizzeria-modele</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>pizzeria-dao</artifactId>
+			<artifactId>nicolas-pizzeria-dao</artifactId>
 		</dependency>
 	</dependencies>
 

@@ -33,8 +33,9 @@ public class PizzaDaoBddImpl implements Dao<Pizza, String> {
 				}
 			}
 		} catch (SQLException e) {
-			throw new SelectDaoException(e.getMessage());
+			throw new SelectDaoException(e.getMessage(), e);
 		}
+		jdbc.disconnect();
 		return pizzas;
 	}
 
@@ -49,8 +50,9 @@ public class PizzaDaoBddImpl implements Dao<Pizza, String> {
 			st.setString(4, pizza.getCategorie().toString());
 			st.executeUpdate();
 		} catch (SQLException e) {
-			throw new SaveDaoException(e.getMessage());
+			throw new SaveDaoException(e.getMessage(), e);
 		}
+		jdbc.disconnect();
 	}
 
 	@Override
@@ -65,8 +67,9 @@ public class PizzaDaoBddImpl implements Dao<Pizza, String> {
 			st.setString(5, code);
 			st.executeUpdate();
 		} catch (SQLException e) {
-			throw new UpdateDaoException(e.getMessage());
+			throw new UpdateDaoException(e.getMessage(), e);
 		}
+		jdbc.disconnect();
 	}
 
 	@Override
@@ -77,8 +80,9 @@ public class PizzaDaoBddImpl implements Dao<Pizza, String> {
 			st.setString(1, code);
 			st.executeUpdate();
 		} catch (SQLException e) {
-			throw new DeleteDaoException(e.getMessage());
+			throw new DeleteDaoException(e.getMessage(), e);
 		}
+		jdbc.disconnect();
 	}
 
 }

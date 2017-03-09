@@ -32,8 +32,8 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 					System.out.println("Le code " + pizza.getCode() + " n'est pas disponible");
 				}
 			} while(!codeDispo);
-		} catch (DaoException ex) {
-			System.out.println(ex.getMessage());
+		} catch (DaoException e) {
+			System.out.println(e.getMessage());
 		}
 		return false;
 	}

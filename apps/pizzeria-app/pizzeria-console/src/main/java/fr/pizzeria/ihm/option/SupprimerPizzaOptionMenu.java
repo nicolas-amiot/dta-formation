@@ -39,8 +39,8 @@ public class SupprimerPizzaOptionMenu  extends OptionMenu {
 					fini = true;
 				}
 			}
-		} catch (DaoException ex) {
-			System.out.println(ex.getMessage());
+		} catch (DaoException e) {
+			System.out.println(e.getMessage());
 		}
 		return false;
 	}

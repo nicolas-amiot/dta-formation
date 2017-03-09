@@ -31,18 +31,12 @@ public class PizzaDaoImpl implements Dao<Pizza, String> {
 
 	@Override
 	public void save(Pizza pizza) throws DaoException {
-		if(pizza.getCode().length() < 3){
-			throw new SaveDaoException("Le code est trop court");
-		}
 		pizzas.add(pizza);
 		Pizza.nbPizzas++;
 	}
 
 	@Override
 	public void update(String codePizza, Pizza pizza) throws DaoException {
-		if(pizza.getCode().length() > 3){
-			throw new UpdateDaoException("L'identifiant doit être positif");
-		}
 		int index = IntStream.range(0, pizzas.size())
         .filter(i -> pizzas.get(i).getCode().equals(codePizza))
         .findFirst().getAsInt();
@@ -51,9 +45,6 @@ public class PizzaDaoImpl implements Dao<Pizza, String> {
 
 	@Override
 	public void delete(String codePizza) throws DaoException {
-		if(codePizza.length() > 3){
-			throw new DeleteDaoException("L'identifiant doit être positif");
-		}
 		pizzas.removeIf(p -> p.getCode().equals(codePizza));
 	}
 

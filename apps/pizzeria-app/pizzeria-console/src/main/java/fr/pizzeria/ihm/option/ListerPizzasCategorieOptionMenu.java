@@ -22,8 +22,8 @@ public class ListerPizzasCategorieOptionMenu extends OptionMenu {
 				this.afficherPizzas(piz);
 				System.out.println("\n");
 			});
-		} catch (DaoException ex) {
-			System.out.println(ex.getMessage());
+		} catch (DaoException e) {
+			System.out.println(e.getMessage());
 		}
 		return false;
 	}

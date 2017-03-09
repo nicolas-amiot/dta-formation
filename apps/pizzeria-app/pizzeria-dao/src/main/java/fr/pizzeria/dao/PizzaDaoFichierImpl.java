@@ -38,7 +38,7 @@ public class PizzaDaoFichierImpl implements Dao<Pizza, String> {
 				}
 			}).collect(Collectors.toList());
 		} catch(IOException e){
-			throw new SelectDaoException(e.getMessage());
+			throw new SelectDaoException(e.getMessage(), e);
 		}
 	}
 
@@ -47,7 +47,7 @@ public class PizzaDaoFichierImpl implements Dao<Pizza, String> {
 		try {
 			Files.write(Paths.get("data", pizza.getCode()+".txt"), pizza.toFileString().getBytes(), StandardOpenOption.CREATE_NEW);
 		} catch (IOException e) {
-			throw new SaveDaoException(e.getMessage());
+			throw new SaveDaoException(e.getMessage(), e);
 		}
 	}
 
@@ -57,7 +57,7 @@ public class PizzaDaoFichierImpl implements Dao<Pizza, String> {
 			delete(codePizza);
 			save(pizza);
 		} catch (DaoException e) {
-			throw new UpdateDaoException(e.getMessage());
+			throw new UpdateDaoException(e.getMessage(), e);
 		}
 	}
 
@@ -66,7 +66,7 @@ public class PizzaDaoFichierImpl implements Dao<Pizza, String> {
 		try {
 			Files.delete(Paths.get("data", codePizza + ".txt"));
 		} catch (IOException e) {
-			throw new DeleteDaoException(e.getMessage());
+			throw new DeleteDaoException(e.getMessage(), e);
 		}
 	}
 

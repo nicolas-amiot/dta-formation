@@ -28,7 +28,7 @@ public class ServiceJDBC {
 			Class.forName(driver);
 			cnx = DriverManager.getConnection(url, user, password);
 		} catch (ClassNotFoundException | SQLException e) {
-			throw new DaoException(e.getMessage());
+			throw new DaoException(e.getMessage(), e);
 		}
 		return cnx;
 	}
@@ -39,7 +39,7 @@ public class ServiceJDBC {
 				cnx.close();
 			}
 		} catch (SQLException e) {
-			throw new DaoException(e.getMessage());
+			throw new DaoException(e.getMessage(), e);
 		}
 	}
 

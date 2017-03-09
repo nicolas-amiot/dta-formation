@@ -22,15 +22,13 @@ public class PizzaDaoBddImpl implements Dao<Pizza, String> {
 		ServiceJDBC jdbc = new ServiceJDBC();
 		Connection cnx = jdbc.connect();
 		List<Pizza> pizzas = new ArrayList<>();
-		try(PreparedStatement st = cnx.prepareStatement("SELECT * FROM pizza")){
-			try(ResultSet rs = st.executeQuery()){
-				while(rs.next()){
-					String code = rs.getString("code");
-					String nom = rs.getString("nom");
-					double prix = rs.getDouble("prix");
-					CategoriePizza categorie = CategoriePizza.valueOf(rs.getString("categorie"));
-					pizzas.add(new Pizza(code, nom, prix, categorie));
-				}
+		try (PreparedStatement st = cnx.prepareStatement("SELECT * FROM pizza"); ResultSet rs = st.executeQuery()) {
+			while (rs.next()) {
+				String code = rs.getString("code");
+				String nom = rs.getString("nom");
+				double prix = rs.getDouble("prix");
+				CategoriePizza categorie = CategoriePizza.valueOf(rs.getString("categorie"));
+				pizzas.add(new Pizza(code, nom, prix, categorie));
 			}
 		} catch (SQLException e) {
 			throw new SelectDaoException(e.getMessage(), e);
@@ -43,7 +41,8 @@ public class PizzaDaoBddImpl implements Dao<Pizza, String> {
 	public void save(Pizza pizza) throws DaoException {
 		ServiceJDBC jdbc = new ServiceJDBC();
 		Connection cnx = jdbc.connect();
-		try(PreparedStatement st = cnx.prepareStatement("INSERT INTO pizza (code, nom, prix, categorie) VALUES (?, ?, ?, ?)")){
+		try (PreparedStatement st = cnx
+				.prepareStatement("INSERT INTO pizza (code, nom, prix, categorie) VALUES (?, ?, ?, ?)")) {
 			st.setString(1, pizza.getCode());
 			st.setString(2, pizza.getNom());
 			st.setDouble(3, pizza.getPrix());
@@ -59,7 +58,8 @@ public class PizzaDaoBddImpl implements Dao<Pizza, String> {
 	public void update(String code, Pizza pizza) throws DaoException {
 		ServiceJDBC jdbc = new ServiceJDBC();
 		Connection cnx = jdbc.connect();
-		try(PreparedStatement st = cnx.prepareStatement("UPDATE pizza SET code = ?, nom = ?, prix = ?, categorie = ? WHERE code = ?")){
+		try (PreparedStatement st = cnx
+				.prepareStatement("UPDATE pizza SET code = ?, nom = ?, prix = ?, categorie = ? WHERE code = ?")) {
 			st.setString(1, pizza.getCode());
 			st.setString(2, pizza.getNom());
 			st.setDouble(3, pizza.getPrix());
@@ -76,7 +76,7 @@ public class PizzaDaoBddImpl implements Dao<Pizza, String> {
 	public void delete(String code) throws DaoException {
 		ServiceJDBC jdbc = new ServiceJDBC();
 		Connection cnx = jdbc.connect();
-		try(PreparedStatement st = cnx.prepareStatement("DELETE FROM pizza WHERE code = ?")){
+		try (PreparedStatement st = cnx.prepareStatement("DELETE FROM pizza WHERE code = ?")) {
 			st.setString(1, code);
 			st.executeUpdate();
 		} catch (SQLException e) {

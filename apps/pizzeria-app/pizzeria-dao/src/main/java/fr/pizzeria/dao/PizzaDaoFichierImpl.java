@@ -13,6 +13,7 @@ import java.util.stream.Stream;
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.exception.DeleteDaoException;
 import fr.pizzeria.exception.SaveDaoException;
+import fr.pizzeria.exception.SelectDaoException;
 import fr.pizzeria.exception.UpdateDaoException;
 import fr.pizzeria.modele.CategoriePizza;
 import fr.pizzeria.modele.Pizza;
@@ -20,7 +21,7 @@ import fr.pizzeria.modele.Pizza;
 public class PizzaDaoFichierImpl implements Dao<Pizza, String> {
 
 	@Override
-	public List<Pizza> findAllPizzas() {
+	public List<Pizza> findAllPizzas() throws DaoException {
 		try(Stream<Path> files = Files.list(Paths.get("data"))){
 			return files.map(chemin -> {
 				String code = chemin.getFileName().toFile().getName().replaceFirst(".txt", "");
@@ -33,13 +34,12 @@ public class PizzaDaoFichierImpl implements Dao<Pizza, String> {
 					return new Pizza(code, nom, prix, categorie);
 				} catch (IOException e) {
 					System.out.println(e.getMessage());
+					return null;
 				}
-				return null;
 			}).collect(Collectors.toList());
 		} catch(IOException e){
-			System.out.println(e.getMessage());
+			throw new SelectDaoException(e.getMessage());
 		}
-		return null;
 	}
 
 	@Override

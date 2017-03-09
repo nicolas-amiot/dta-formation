@@ -14,33 +14,33 @@ public class SupprimerPizzaOptionMenu  extends OptionMenu {
 
 	@Override
 	public boolean execute(IhmTools ihmTools) {
-		List<Pizza> pizzas = ihmTools.getPizzaDao().findAllPizzas();
-		this.afficherPizzas(pizzas);
-		boolean fini = false;
-		while(!fini){
-			System.out.println("Veuillez choisir la pizza à supprimer (stop pour abandonner).");
-			String codeChoisi = ihmTools.getScanner().next();
-			int index = 0;
-			if(!codeChoisi.equals("stop")){
-				while(index < pizzas.size() && !fini){
-					if(codeChoisi.equals(pizzas.get(index).getCode())){
-						fini = true;
-					} else {
-						index++;
+		try{
+			List<Pizza> pizzas = ihmTools.getPizzaDao().findAllPizzas();
+			this.afficherPizzas(pizzas);
+			boolean fini = false;
+			while(!fini){
+				System.out.println("Veuillez choisir la pizza à supprimer (stop pour abandonner).");
+				String codeChoisi = ihmTools.getScanner().next();
+				int index = 0;
+				if(!codeChoisi.equals("stop")){
+					while(index < pizzas.size() && !fini){
+						if(codeChoisi.equals(pizzas.get(index).getCode())){
+							fini = true;
+						} else {
+							index++;
+						}
 					}
-				}
-				if(fini){
-					try {
+					if(fini){
 						ihmTools.getPizzaDao().delete(codeChoisi);
-					} catch (DaoException e) {
-						System.out.println(e.getMessage());
+					} else {
+						System.out.println("Cette pizza n'existe pas.");
 					}
 				} else {
-					System.out.println("Cette pizza n'existe pas.");
+					fini = true;
 				}
-			} else {
-				fini = true;
 			}
+		} catch (DaoException ex) {
+			System.out.println(ex.getMessage());
 		}
 		return false;
 	}

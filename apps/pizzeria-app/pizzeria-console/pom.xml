@@ -59,7 +59,7 @@
 
 	<profiles>
 		<profile>
-			<id>dev</id>
+			<id>test</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
@@ -68,9 +68,15 @@
 			</properties>
 		</profile>
 		<profile>
-			<id>prod</id>
+			<id>dev</id>
 			<properties>
 				<service.impl>fr.pizzeria.dao.PizzaDaoFichierImpl</service.impl>
+			</properties>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<service.impl>fr.pizzeria.dao.PizzaDaoBddImpl</service.impl>
 			</properties>
 		</profile>
 	</profiles>

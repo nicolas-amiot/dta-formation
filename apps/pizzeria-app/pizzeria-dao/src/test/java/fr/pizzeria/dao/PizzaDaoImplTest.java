@@ -30,7 +30,7 @@ public class PizzaDaoImplTest {
 	
 	@Ignore
 	@Test
-	public void test_find_all(){ // Plus simple à lire lors des tests
+	public void test_find_all() throws DaoException{ // Plus simple à lire lors des tests
 		List<Pizza> pizzas = pizzaDao.findAllPizzas();
 		assertEquals(8, pizzas.size());
 	}

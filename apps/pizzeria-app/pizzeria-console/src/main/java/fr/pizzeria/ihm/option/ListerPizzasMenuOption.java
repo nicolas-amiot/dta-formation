@@ -17,7 +17,6 @@ public class ListerPizzasMenuOption extends OptionMenu {
 		try{
 			List<Pizza> pizzas = ihmTools.getPizzaDao().findAllPizzas();
 			this.afficherPizzas(pizzas);
-			System.out.println("-> " + Pizza.nbPizzas + " pizzas créées depuis l'initialisation du programme");
 		} catch (DaoException e) {
 			System.out.println(e.getMessage());
 		}

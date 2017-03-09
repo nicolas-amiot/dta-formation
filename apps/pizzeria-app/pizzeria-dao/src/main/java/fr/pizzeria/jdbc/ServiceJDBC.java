@@ -1,4 +1,4 @@
-package fr.pizzeria.dao;
+package fr.pizzeria.jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,19 +14,22 @@ public class ServiceJDBC {
 	private String url;
 	private String user;
 	private String password;
-	
-	public ServiceJDBC(){
+
+	public ServiceJDBC() {
 		ResourceBundle bundle = ResourceBundle.getBundle("jdbc");
 		driver = bundle.getString("database.driver");
-		url = "jdbc:"+bundle.getString("database.type")+"://"+bundle.getString("database.host")+":"+bundle.getString("database.port")+"/"+bundle.getString("database.name");
+		url = "jdbc:" + bundle.getString("database.type") + "://" + bundle.getString("database.host") + ":"
+				+ bundle.getString("database.port") + "/" + bundle.getString("database.name");
 		user = bundle.getString("database.user");
 		password = bundle.getString("database.password");
 	}
 
 	public Connection connect() throws DaoException {
 		try {
-			Class.forName(driver);
-			cnx = DriverManager.getConnection(url, user, password);
+			if (cnx == null || cnx.isClosed()) {
+				Class.forName(driver);
+				cnx = DriverManager.getConnection(url, user, password);
+			}
 		} catch (ClassNotFoundException | SQLException e) {
 			throw new DaoException(e.getMessage(), e);
 		}

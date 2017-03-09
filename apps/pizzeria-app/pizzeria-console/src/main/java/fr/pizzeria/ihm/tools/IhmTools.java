@@ -19,6 +19,9 @@ public class IhmTools {
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+		if(!(pizzaDao instanceof PizzaDaoBddImpl)){
+			System.out.println("Attention: l'implémentation choisie n'est pas celle en base de données");
+		}
 		return pizzaDao;
 	}
 	

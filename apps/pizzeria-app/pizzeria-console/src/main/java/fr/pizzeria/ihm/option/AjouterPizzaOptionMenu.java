@@ -19,7 +19,7 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 			pizzas = ihmTools.getPizzaDao().findAllPizzas();
 			boolean codeDispo = true;
 			do{
-				Pizza pizza = this.saisirPizza(pizzas.size(), ihmTools.getScanner());
+				Pizza pizza = this.saisirPizza(ihmTools.getScanner());
 				for(int i = 0; i < pizzas.size(); i++){
 					if(pizza.getCode().equals(pizzas.get(i).getCode())){
 						codeDispo = false;

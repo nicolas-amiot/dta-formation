@@ -21,7 +21,6 @@ public class PizzaDaoImpl implements Dao<Pizza, String> {
 		pizzas.add(new Pizza("SAV", "La savoyarde", 13.00, CategoriePizza.VIANDE));
 		pizzas.add(new Pizza("ORI", "L'orientale", 13.50, CategoriePizza.POISSON));
 		pizzas.add(new Pizza("IND", "L'indienne", 14.00, CategoriePizza.VIANDE));
-		Pizza.nbPizzas = pizzas.size();
 	}
 
 	@Override
@@ -32,7 +31,6 @@ public class PizzaDaoImpl implements Dao<Pizza, String> {
 	@Override
 	public void save(Pizza pizza) throws DaoException {
 		pizzas.add(pizza);
-		Pizza.nbPizzas++;
 	}
 
 	@Override

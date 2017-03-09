@@ -23,15 +23,10 @@ public abstract class OptionMenu {
 	public abstract boolean execute(IhmTools ihmTools);
 	
 	public void afficherPizzas(List<Pizza> pizzas){
-		/*
-		for(Pizza pizza : pizzas){
-			System.out.println(pizza);
-		}
-		*/
 		pizzas.forEach(System.out::println);
 	}
 	
-	public Pizza saisirPizza(int nbPizza, Scanner sc){
+	public Pizza saisirPizza(Scanner sc){
 		System.out.println("Veuillez saisir le code");
 		String code = sc.next();
 		System.out.println("Veuillez saisir le nom (sans espace)");
@@ -39,11 +34,6 @@ public abstract class OptionMenu {
 		System.out.println("Veuillez saisir le prix");
 		double prix = sc.nextDouble();
 		System.out.println("Veuillez saisir la catégorie");
-		/*
-		for(CategoriePizza categorie : CategoriePizza.values()){
-			System.out.print(categorie + " ");
-		}
-		*/
 		Arrays.asList(CategoriePizza.values()).forEach(categorie -> System.out.print(categorie + " "));
 		System.out.print("\n");
 		CategoriePizza categorie = CategoriePizza.valueOf(sc.next().toUpperCase());

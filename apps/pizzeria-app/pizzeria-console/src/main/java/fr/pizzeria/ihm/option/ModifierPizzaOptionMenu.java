@@ -22,7 +22,7 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 				int index = 0;
 				System.out.println("Veuillez choisir la pizza à modifier (stop pour abandonner).");
 				String codeChoisi = ihmTools.getScanner().next();
-				if(!codeChoisi.equals("stop")){
+				if(!"stop".equals(codeChoisi)){
 					while(index < pizzas.size() && !fini){
 						if(codeChoisi.equals(pizzas.get(index).getCode())){
 							fini = true;
@@ -33,7 +33,7 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 					if(fini){
 						boolean codeDispo;
 						do{
-							Pizza pizza = this.saisirPizza(pizzas.size(), ihmTools.getScanner());
+							Pizza pizza = this.saisirPizza(ihmTools.getScanner());
 							codeDispo = true;
 							for(int i = 0; i < pizzas.size(); i++){
 								if(pizza.getCode().equals(pizzas.get(i).getCode()) && i != index){

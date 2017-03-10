@@ -105,13 +105,11 @@ public class PizzaDaoBddImpl implements Dao<Pizza, String> {
 						save(pizza, cnx);
 						logger.log(Level.INFO, "L'import de la pizza " + pizza.getNom() + " a reussi\n");
 					} catch (Exception e) {
-						logger.log(Level.INFO, pizza.getNom() + " n'as pas pu etre synchronise avec la base de donnees\n");
-						
+						logger.log(Level.WARNING, pizza.getNom() + " n'as pas pu etre synchronise avec la base de donnees\n", e);
 					}
 				}
 				cnx.commit();
 			}
-			System.out.println();
 		} catch (SQLException e) {
 			throw new DaoException(e.getMessage(), e);
 		}

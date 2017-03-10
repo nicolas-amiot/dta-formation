@@ -62,7 +62,7 @@ public class Pizza {
 						sb.append(")");
 					}
 				} catch (IllegalArgumentException | IllegalAccessException e) {
-					e.printStackTrace();
+					System.out.println(e.getMessage());
 				}
 			}
 		}

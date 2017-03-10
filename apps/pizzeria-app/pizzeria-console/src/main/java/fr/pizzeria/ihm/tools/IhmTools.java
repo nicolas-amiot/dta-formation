@@ -21,7 +21,7 @@ public class IhmTools {
 				sourceDao = (Dao<Pizza, String>) Class.forName(sourceImpl).newInstance();
 			}
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
 	

@@ -83,6 +83,7 @@
 			<id>prod</id>
 			<properties>
 				<service.impl>fr.pizzeria.dao.PizzaDaoBddImpl</service.impl>
+				<service.source>fr.pizzeria.dao.PizzaDaoFichierImpl</service.source>
 			</properties>
 		</profile>
 	</profiles>

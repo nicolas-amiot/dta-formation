@@ -22,34 +22,6 @@ public class PizzaDaoBddImpl implements Dao<Pizza, String> {
 
 	private ServiceJDBC jdbc = new ServiceJDBC();
 
-	public PizzaDaoBddImpl() throws DaoException {
-		importDataFiles();
-	}
-
-	private void importDataFiles() throws DaoException {
-		Connection cnx = jdbc.connect();
-		try {
-			cnx.setAutoCommit(false);
-			Dao<Pizza, String> dao = new PizzaDaoFichierImpl();
-			List<List<Pizza>> listPizzas = ListUtils.partition(dao.findAllPizzas(), 3);
-			for (List<Pizza> pizzas : listPizzas) {
-				for (Pizza pizza : pizzas) {
-					try {
-						save(pizza, cnx);
-					} catch (Exception e) {
-						System.out.println(pizza.toString() + " n'as pas pu être synchronisé avec la base de données");
-					}
-				}
-				cnx.commit();
-			}
-			System.out.println();
-			cnx.setAutoCommit(true);
-		} catch (SQLException e) {
-			throw new DaoException(e.getMessage(), e);
-		}
-		jdbc.disconnect();
-	}
-
 	@Override
 	public List<Pizza> findAllPizzas() throws DaoException {
 		Connection cnx = jdbc.connect();
@@ -114,6 +86,30 @@ public class PizzaDaoBddImpl implements Dao<Pizza, String> {
 			st.executeUpdate();
 		} catch (SQLException e) {
 			throw new DeleteDaoException(e.getMessage(), e);
+		}
+		jdbc.disconnect();
+	}
+	
+	@Override
+	public void importData(Dao<Pizza, String> source) throws DaoException {
+		Connection cnx = jdbc.connect();
+		try {
+			cnx.setAutoCommit(false);
+			List<List<Pizza>> listPizzas = ListUtils.partition(source.findAllPizzas(), 3);
+			for (List<Pizza> pizzas : listPizzas) {
+				for (Pizza pizza : pizzas) {
+					try {
+						save(pizza, cnx);
+						System.out.println("L'import de la pizza " + pizza.getNom() + " à été éffectué");
+					} catch (Exception e) {
+						System.out.println(pizza.getNom() + " n'as pas pu être synchronisé avec la base de données");
+					}
+				}
+				cnx.commit();
+			}
+			System.out.println();
+		} catch (SQLException e) {
+			throw new DaoException(e.getMessage(), e);
 		}
 		jdbc.disconnect();
 	}

@@ -5,6 +5,7 @@ import java.util.TreeMap;
 
 import fr.pizzeria.ihm.option.AfficherPizzaUltime;
 import fr.pizzeria.ihm.option.AjouterPizzaOptionMenu;
+import fr.pizzeria.ihm.option.ImporterPizzaOptionMenu;
 import fr.pizzeria.ihm.option.ListerPizzasCategorieOptionMenu;
 import fr.pizzeria.ihm.option.ListerPizzasMenuOption;
 import fr.pizzeria.ihm.option.ModifierPizzaOptionMenu;
@@ -23,6 +24,7 @@ public class MenuPrincipal extends Menu {
 		actions.put(4, new SupprimerPizzaOptionMenu());
 		actions.put(5,  new ListerPizzasCategorieOptionMenu());
 		actions.put(6, new AfficherPizzaUltime());
+		actions.put(7, new ImporterPizzaOptionMenu());
 		actions.put(99, new SortirOptionMenu());
 	}
 

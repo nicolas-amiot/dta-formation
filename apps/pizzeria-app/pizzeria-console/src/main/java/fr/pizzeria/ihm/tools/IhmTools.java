@@ -2,6 +2,9 @@ package fr.pizzeria.ihm.tools;
 
 import java.util.ResourceBundle;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import fr.pizzeria.dao.Dao;
 import fr.pizzeria.modele.Pizza;
 
@@ -21,7 +24,8 @@ public class IhmTools {
 				sourceDao = (Dao<Pizza, String>) Class.forName(sourceImpl).newInstance();
 			}
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			System.out.println(e.getMessage());
+			Logger logger = Logger.getLogger(this.getClass().getName());
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 	

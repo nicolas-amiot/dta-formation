@@ -7,6 +7,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -33,7 +35,8 @@ public class PizzaDaoFichierImpl implements Dao<Pizza, String> {
 					CategoriePizza categorie = CategoriePizza.valueOf(contenuFichier[2]);
 					return new Pizza(code, nom, prix, categorie);
 				} catch (IOException e) {
-					System.out.println(e.getMessage());
+					Logger logger = Logger.getLogger(this.getClass().getName());
+					logger.log(Level.SEVERE, e.getMessage(), e);
 					return null;
 				}
 			}).collect(Collectors.toList());

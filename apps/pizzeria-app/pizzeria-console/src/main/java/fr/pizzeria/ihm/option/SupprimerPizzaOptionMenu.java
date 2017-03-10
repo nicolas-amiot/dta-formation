@@ -1,6 +1,8 @@
 package fr.pizzeria.ihm.option;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.ihm.tools.IhmTools;
@@ -22,7 +24,7 @@ public class SupprimerPizzaOptionMenu  extends OptionMenu {
 				System.out.println("Veuillez choisir la pizza à supprimer (stop pour abandonner).");
 				String codeChoisi = ihmTools.getScanner().next();
 				int index = 0;
-				if(!codeChoisi.equals("stop")){
+				if(!"stop".equals(codeChoisi)){
 					while(index < pizzas.size() && !fini){
 						if(codeChoisi.equals(pizzas.get(index).getCode())){
 							fini = true;
@@ -40,7 +42,8 @@ public class SupprimerPizzaOptionMenu  extends OptionMenu {
 				}
 			}
 		} catch (DaoException e) {
-			System.out.println(e.getMessage());
+			Logger logger = Logger.getLogger(this.getClass().getName());
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 		return false;
 	}

@@ -1,6 +1,8 @@
 package fr.pizzeria.ihm.option;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import fr.pizzeria.exception.DaoException;
@@ -23,7 +25,8 @@ public class ListerPizzasCategorieOptionMenu extends OptionMenu {
 				System.out.println("\n");
 			});
 		} catch (DaoException e) {
-			System.out.println(e.getMessage());
+			Logger logger = Logger.getLogger(this.getClass().getName());
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 		return false;
 	}

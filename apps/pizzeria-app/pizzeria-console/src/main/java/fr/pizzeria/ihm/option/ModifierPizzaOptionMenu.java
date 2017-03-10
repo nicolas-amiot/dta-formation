@@ -1,6 +1,8 @@
 package fr.pizzeria.ihm.option;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.ihm.tools.IhmTools;
@@ -55,7 +57,8 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 				}
 			}
 		} catch (DaoException e) {
-			System.out.println(e.getMessage());
+			Logger logger = Logger.getLogger(this.getClass().getName());
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 		return false;
 	}

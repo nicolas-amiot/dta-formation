@@ -1,6 +1,8 @@
 package fr.pizzeria.modele;
 
 import java.lang.reflect.Field;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -62,7 +64,8 @@ public class Pizza {
 						sb.append(")");
 					}
 				} catch (IllegalArgumentException | IllegalAccessException e) {
-					System.out.println(e.getMessage());
+					Logger logger = Logger.getLogger(this.getClass().getName());
+					logger.log(Level.SEVERE, e.getMessage(), e);
 				}
 			}
 		}

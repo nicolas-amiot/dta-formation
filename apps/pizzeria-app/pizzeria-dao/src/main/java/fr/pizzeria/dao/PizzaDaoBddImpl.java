@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.apache.commons.collections4.ListUtils;
 
@@ -92,6 +94,7 @@ public class PizzaDaoBddImpl implements Dao<Pizza, String> {
 	
 	@Override
 	public void importData(Dao<Pizza, String> source) throws DaoException {
+		Logger logger = Logger.getLogger(this.getClass().getName());
 		Connection cnx = jdbc.connect();
 		try {
 			cnx.setAutoCommit(false);
@@ -100,9 +103,10 @@ public class PizzaDaoBddImpl implements Dao<Pizza, String> {
 				for (Pizza pizza : pizzas) {
 					try {
 						save(pizza, cnx);
-						System.out.println("L'import de la pizza " + pizza.getNom() + " à été éffectué");
+						logger.log(Level.INFO, "L'import de la pizza " + pizza.getNom() + " a reussi\n");
 					} catch (Exception e) {
-						System.out.println(pizza.getNom() + " n'as pas pu être synchronisé avec la base de données");
+						logger.log(Level.INFO, pizza.getNom() + " n'as pas pu etre synchronise avec la base de donnees\n");
+						
 					}
 				}
 				cnx.commit();

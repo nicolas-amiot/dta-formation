@@ -86,5 +86,12 @@
 				<service.source>fr.pizzeria.dao.PizzaDaoFichierImpl</service.source>
 			</properties>
 		</profile>
+		<profile>
+			<id>jpa</id>
+			<properties>
+				<service.impl>fr.pizzeria.dao.PizzaDaoJpaImpl</service.impl>
+				<service.source>fr.pizzeria.dao.PizzaDaoFichierImpl</service.source>
+			</properties>
+		</profile>
 	</profiles>
 </project>

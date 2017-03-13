@@ -4,25 +4,50 @@ import java.lang.reflect.Field;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+@Entity
+@NamedQueries({
+	@NamedQuery(name = "pizza.findAllPizzas", query = "select p from Pizza p"),
+	@NamedQuery(name = "pizza.getById", query = "select p from Pizza p where p.code = :code")
+})
 public class Pizza {
 
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Id
+	private Integer id;
 	@ToString
 	private String code;
 	@ToString
 	private String nom;
 	@ToString
+	@Enumerated(EnumType.STRING)
 	private CategoriePizza categorie;
 	@ToString
 	private double prix;
+	
+	public Pizza() {
+		
+	}
 
 	public Pizza(String code, String nom, double prix, CategoriePizza categorie) {
 		this.code = code;
 		this.nom = nom;
 		this.prix = prix;
 		this.categorie = categorie;
+	}
+	public Integer getId() {
+		return id;
 	}
 
 	public String getCode() {
@@ -39,6 +64,26 @@ public class Pizza {
 
 	public CategoriePizza getCategorie() {
 		return categorie;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public void setCategorie(CategoriePizza categorie) {
+		this.categorie = categorie;
+	}
+
+	public void setPrix(double prix) {
+		this.prix = prix;
 	}
 
 	@Override

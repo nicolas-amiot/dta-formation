@@ -104,6 +104,7 @@
 		<module>pizzeria-dao</module>
 		<module>pizzeria-console</module>
 		<module>pizzeria-client</module>
+		<module>pizzeria-admin-app</module>
 	</modules>
 
 </project>

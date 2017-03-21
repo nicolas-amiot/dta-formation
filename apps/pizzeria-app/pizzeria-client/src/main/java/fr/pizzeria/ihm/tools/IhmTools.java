@@ -1,6 +1,9 @@
 package fr.pizzeria.ihm.tools;
 
+import java.util.ResourceBundle;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import fr.pizzeria.dao.ClientDaoJpaImpl;
 import fr.pizzeria.dao.CommandeDaoJpaImpl;
@@ -22,6 +25,10 @@ public class IhmTools {
 	private Client client;
 	
 	private Scanner scanner = new Scanner(System.in);
+	
+	public IhmTools() {
+		java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
+	}
 	
 	public Dao<Pizza, String> getPizzaDao() {
 		return pizzaDao;

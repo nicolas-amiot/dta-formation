@@ -15,7 +15,7 @@ public class IhmTools {
 	private Scanner scanner = new Scanner(System.in);
 	
 	public IhmTools() {
-		//java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
+		java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
 		ResourceBundle bundle = ResourceBundle.getBundle("application");
 		String serviceImpl = bundle.getString("service.impl");
 		String sourceImpl = bundle.getString("service.source");

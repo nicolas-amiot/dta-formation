@@ -23,7 +23,7 @@ import fr.pizzeria.modele.Pizza;
 public class PizzaDaoFichierImpl implements Dao<Pizza, String> {
 
 	@Override
-	public List<Pizza> findAllPizzas() throws DaoException {
+	public List<Pizza> findAll() throws DaoException {
 		try(Stream<Path> files = Files.list(Paths.get("data"))){
 			return files.map(chemin -> {
 				String code = chemin.getFileName().toFile().getName().replaceFirst(".txt", "");

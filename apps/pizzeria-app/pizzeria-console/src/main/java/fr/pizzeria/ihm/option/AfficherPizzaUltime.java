@@ -18,7 +18,7 @@ public class AfficherPizzaUltime extends OptionMenu {
 	@Override
 	public boolean execute(IhmTools ihmTools) {
 		try {
-			List<Pizza> pizzas = ihmTools.getPizzaDao().findAllPizzas();
+			List<Pizza> pizzas = ihmTools.getPizzaDao().findAll();
 			Pizza pizza = pizzas.stream().max(Comparator.comparing(Pizza::getPrix)).get();
 			System.out.println(pizza);
 		} catch (DaoException e) {

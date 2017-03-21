@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -23,18 +24,27 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 })
 public class Pizza {
 
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	
 	@ToString
+	@Column(length = 255, unique = true)
 	private String code;
+	
 	@ToString
+	@Column(length = 255)
 	private String nom;
+	
+	@ToString
+	private double prix;
+	
 	@ToString
 	@Enumerated(EnumType.STRING)
 	private CategoriePizza categorie;
-	@ToString
-	private double prix;
+	
+	@Column(length = 255)
+	private String url;
 	
 	public Pizza() {
 		
@@ -46,44 +56,58 @@ public class Pizza {
 		this.prix = prix;
 		this.categorie = categorie;
 	}
+	
+	public Pizza(String code, String nom, double prix, CategoriePizza categorie, String url) {
+		this(code, nom, prix, categorie);
+		this.url = url;
+	}
+
 	public Integer getId() {
 		return id;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public String getNom() {
-		return nom;
-	}
-
-	public double getPrix() {
-		return prix;
-	}
-
-	public CategoriePizza getCategorie() {
-		return categorie;
 	}
 
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
+	public String getCode() {
+		return code;
+	}
+
 	public void setCode(String code) {
 		this.code = code;
+	}
+
+	public String getNom() {
+		return nom;
 	}
 
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
 
-	public void setCategorie(CategoriePizza categorie) {
-		this.categorie = categorie;
+	public double getPrix() {
+		return prix;
 	}
 
 	public void setPrix(double prix) {
 		this.prix = prix;
+	}
+	
+	public CategoriePizza getCategorie() {
+		return categorie;
+	}
+
+	public void setCategorie(CategoriePizza categorie) {
+		this.categorie = categorie;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	@Override

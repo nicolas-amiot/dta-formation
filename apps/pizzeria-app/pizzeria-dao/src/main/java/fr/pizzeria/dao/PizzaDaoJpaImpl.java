@@ -1,7 +1,5 @@
 package fr.pizzeria.dao;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,14 +19,13 @@ public class PizzaDaoJpaImpl implements Dao<Pizza, String> {
 	EntityManagerFactory emf;
 
 	public PizzaDaoJpaImpl() {
-		java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
 		emf = Persistence.createEntityManagerFactory("nicolas-pizzeria-console");
 	}
 
 	@Override
-	public List<Pizza> findAllPizzas() throws DaoException {
+	public List<Pizza> findAll() throws DaoException {
 		EntityManager em = emf.createEntityManager();
-		TypedQuery<Pizza> query = em.createNamedQuery("pizza.findAllPizzas", Pizza.class); // TypedQuery<Pizza> query = em.createQuery("select p from Pizza p", Pizza.class);
+		TypedQuery<Pizza> query = em.createNamedQuery("pizza.findAllPizzas", Pizza.class);
 		List<Pizza> pizzas = query.getResultList();
 		em.close();
 		return pizzas;
@@ -67,7 +64,7 @@ public class PizzaDaoJpaImpl implements Dao<Pizza, String> {
 	public void importData(Dao<Pizza, String> source) throws DaoException {
 		Logger logger = Logger.getLogger(this.getClass().getName());
 		EntityManager em = emf.createEntityManager();
-		List<List<Pizza>> listPizzas = ListUtils.partition(source.findAllPizzas(), 3);
+		List<List<Pizza>> listPizzas = ListUtils.partition(source.findAll(), 3);
 		for (List<Pizza> pizzas : listPizzas) {
 			em.getTransaction().begin();
 			for (Pizza pizza : pizzas) {
@@ -86,7 +83,7 @@ public class PizzaDaoJpaImpl implements Dao<Pizza, String> {
 	}
 
 	private Pizza getByCode(String code, EntityManager em) {
-		TypedQuery<Pizza> query = em.createNamedQuery("pizza.getById", Pizza.class); // TypedQuery<Pizza> query = em.createQuery("select p from Pizza p where p.code = :code", Pizza.class);
+		TypedQuery<Pizza> query = em.createNamedQuery("pizza.getById", Pizza.class);
 		query.setParameter("code", code);
 		Pizza pizza = query.getSingleResult();
 		return pizza;

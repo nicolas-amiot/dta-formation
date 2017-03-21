@@ -24,7 +24,7 @@ public class PizzaDaoImpl implements Dao<Pizza, String> {
 	}
 
 	@Override
-	public List<Pizza> findAllPizzas() throws DaoException {
+	public List<Pizza> findAll() throws DaoException {
 		return new ArrayList<>(pizzas);
 	}
 

@@ -17,7 +17,7 @@ public class SupprimerPizzaOptionMenu  extends OptionMenu {
 	@Override
 	public boolean execute(IhmTools ihmTools) {
 		try{
-			List<Pizza> pizzas = ihmTools.getPizzaDao().findAllPizzas();
+			List<Pizza> pizzas = ihmTools.getPizzaDao().findAll();
 			this.afficherPizzas(pizzas);
 			boolean fini = false;
 			while(!fini){

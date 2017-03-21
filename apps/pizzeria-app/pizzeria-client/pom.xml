@@ -1,5 +1,7 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
@@ -9,7 +11,7 @@
 		<relativePath>../</relativePath>
 	</parent>
 
-	<artifactId>nicolas-pizzeria-console</artifactId>
+	<artifactId>nicolas-pizzeria-client</artifactId>
 
 	<build>
 		<resources>
@@ -38,7 +40,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>fr.pizzeria.console.AppPizzeria</mainClass>
+							<mainClass>fr.pizzeria.client.AppPizzeria</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
@@ -61,37 +63,10 @@
 			<version>1.5.9</version>
 			<scope>runtime</scope>
 		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+		</dependency>
 	</dependencies>
 
-	<profiles>
-		<profile>
-			<id>test</id>
-			<properties>
-				<service.impl>fr.pizzeria.dao.PizzaDaoImpl</service.impl>
-			</properties>
-		</profile>
-		<profile>
-			<id>dev</id>
-			<properties>
-				<service.impl>fr.pizzeria.dao.PizzaDaoFichierImpl</service.impl>
-			</properties>
-		</profile>
-		<profile>
-			<id>prod</id>
-			<properties>
-				<service.impl>fr.pizzeria.dao.PizzaDaoBddImpl</service.impl>
-				<service.source>fr.pizzeria.dao.PizzaDaoFichierImpl</service.source>
-			</properties>
-		</profile>
-		<profile>
-			<id>jpa</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<service.impl>fr.pizzeria.dao.PizzaDaoJpaImpl</service.impl>
-				<service.source>fr.pizzeria.dao.PizzaDaoFichierImpl</service.source>
-			</properties>
-		</profile>
-	</profiles>
 </project>

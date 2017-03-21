@@ -18,7 +18,7 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 	public boolean execute(IhmTools ihmTools) {
 		List<Pizza> pizzas;
 		try {
-			pizzas = ihmTools.getPizzaDao().findAllPizzas();
+			pizzas = ihmTools.getPizzaDao().findAll();
 			boolean codeDispo = true;
 			do{
 				Pizza pizza = this.saisirPizza(ihmTools.getScanner());

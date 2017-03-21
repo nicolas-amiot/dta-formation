@@ -25,7 +25,7 @@ public class PizzaDaoBddImpl implements Dao<Pizza, String> {
 	private ServiceJDBC jdbc = new ServiceJDBC();
 
 	@Override
-	public List<Pizza> findAllPizzas() throws DaoException {
+	public List<Pizza> findAll() throws DaoException {
 		Connection cnx = jdbc.connect();
 		List<Pizza> pizzas = new ArrayList<>();
 		try (PreparedStatement st = cnx.prepareStatement("SELECT * FROM pizza"); ResultSet rs = st.executeQuery()) {
@@ -98,7 +98,7 @@ public class PizzaDaoBddImpl implements Dao<Pizza, String> {
 		Connection cnx = jdbc.connect();
 		try {
 			cnx.setAutoCommit(false);
-			List<List<Pizza>> listPizzas = ListUtils.partition(source.findAllPizzas(), 3);
+			List<List<Pizza>> listPizzas = ListUtils.partition(source.findAll(), 3);
 			for (List<Pizza> pizzas : listPizzas) {
 				for (Pizza pizza : pizzas) {
 					try {

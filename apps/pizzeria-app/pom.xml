@@ -82,6 +82,11 @@
 				<artifactId>hibernate-entitymanager</artifactId>
 				<version>5.1.0.Final</version>
 			</dependency>
+			<dependency>
+				<groupId>commons-codec</groupId>
+				<artifactId>commons-codec</artifactId>
+				<version>1.10</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -98,6 +103,7 @@
 		<module>pizzeria-modele</module>
 		<module>pizzeria-dao</module>
 		<module>pizzeria-console</module>
+		<module>pizzeria-client</module>
 	</modules>
 
 </project>

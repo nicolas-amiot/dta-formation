@@ -31,7 +31,7 @@ public class PizzaDaoImplTest {
 	@Ignore
 	@Test
 	public void test_find_all() throws DaoException{ // Plus simple à lire lors des tests
-		List<Pizza> pizzas = pizzaDao.findAllPizzas();
+		List<Pizza> pizzas = pizzaDao.findAll();
 		assertEquals(8, pizzas.size());
 	}
 	
@@ -40,7 +40,7 @@ public class PizzaDaoImplTest {
 	public void test_save_invalid_data() throws DaoException{
 		Pizza pizza = new Pizza(null, null, 0, null);
 		pizzaDao.save(pizza);
-		List<Pizza> pizzas = pizzaDao.findAllPizzas();
+		List<Pizza> pizzas = pizzaDao.findAll();
 		assertEquals(8, pizzas.size());
 	}
 	
@@ -49,7 +49,7 @@ public class PizzaDaoImplTest {
 	public void test_save_valid_data() throws DaoException{
 		Pizza pizza = new Pizza("TEST", "Test", 10.50, CategoriePizza.SANS_VIANDE);
 		pizzaDao.save(pizza);
-		List<Pizza> pizzas = pizzaDao.findAllPizzas();
+		List<Pizza> pizzas = pizzaDao.findAll();
 		assertThat(pizzas.size(), allOf(is(9), is(10))); // Privilégier asserThat que assertEquals
 	}
 	

@@ -15,12 +15,13 @@ public class IhmTools {
 	private Scanner scanner = new Scanner(System.in);
 	
 	public IhmTools() {
+		//java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
 		ResourceBundle bundle = ResourceBundle.getBundle("application");
 		String serviceImpl = bundle.getString("service.impl");
 		String sourceImpl = bundle.getString("service.source");
 		try {
 			pizzaDao = (Dao<Pizza, String>) Class.forName(serviceImpl).newInstance();
-			if(!sourceImpl.isEmpty()){
+			if(!sourceImpl.equals("${service.source}")){
 				sourceDao = (Dao<Pizza, String>) Class.forName(sourceImpl).newInstance();
 			}
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {

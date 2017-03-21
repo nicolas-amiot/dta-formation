@@ -18,7 +18,7 @@ public class ListerPizzasCategorieOptionMenu extends OptionMenu {
 	@Override
 	public boolean execute(IhmTools ihmTools) {
 		try {
-			List<Pizza> pizzas = ihmTools.getPizzaDao().findAllPizzas();
+			List<Pizza> pizzas = ihmTools.getPizzaDao().findAll();
 			pizzas.stream().collect(Collectors.groupingBy(Pizza::getCategorie)).forEach((cat, piz) -> {
 				System.out.println("Dans la categorie " + cat + ":");
 				this.afficherPizzas(piz);

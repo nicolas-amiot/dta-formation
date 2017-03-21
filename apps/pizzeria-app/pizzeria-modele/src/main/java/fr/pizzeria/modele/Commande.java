@@ -1,5 +1,6 @@
 package fr.pizzeria.modele;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Commande {
+public class Commande implements Serializable {
 	
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Id

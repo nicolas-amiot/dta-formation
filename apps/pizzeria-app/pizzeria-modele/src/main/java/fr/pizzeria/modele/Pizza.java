@@ -1,5 +1,6 @@
 package fr.pizzeria.modele;
 
+import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,7 +23,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 	@NamedQuery(name = "pizza.findAllPizzas", query = "select p from Pizza p"),
 	@NamedQuery(name = "pizza.getById", query = "select p from Pizza p where p.code = :code")
 })
-public class Pizza {
+public class Pizza implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

@@ -2,6 +2,8 @@ package fr.pizzeria.admin.web;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,13 +21,14 @@ import fr.pizzeria.modele.Pizza;
  */
 public class PizzaServletWebApi extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static Dao<Pizza, String> pizzaDao;
+	Logger logger = Logger.getLogger(this.getClass().getName());
+	private static Dao<Pizza, String> pizzaDao = new PizzaDaoJpaImpl();
 
     /**
      * Default constructor. 
      */
     public PizzaServletWebApi() {
-    	pizzaDao = new PizzaDaoJpaImpl();
+    	
     }
 
 	/**
@@ -38,7 +41,7 @@ public class PizzaServletWebApi extends HttpServlet {
 				response.getWriter().append(pizza.toString()+"\n");
 			}
 		} catch (DaoException e) {
-			response.getWriter().print("Impossible de lister les pizzas");
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 
@@ -51,7 +54,7 @@ public class PizzaServletWebApi extends HttpServlet {
 			pizzaDao.save(pizza);
 			response.getWriter().print("Ajout de la pizza réussi");
 		} catch (DaoException e) {
-			response.getWriter().print("Impossible de lister les pizzas");
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 
@@ -64,7 +67,7 @@ public class PizzaServletWebApi extends HttpServlet {
 			pizzaDao.update("TEST", pizza);
 			response.getWriter().print("Modification de la pizza réussi");
 		} catch (DaoException e) {
-			response.getWriter().print("Impossible de modifier la pizza 'TEST'");
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 
@@ -76,7 +79,7 @@ public class PizzaServletWebApi extends HttpServlet {
 			pizzaDao.delete("TEST");
 			response.getWriter().print("Suppression de la pizza réussi");
 		} catch (DaoException e) {
-			response.getWriter().print("Impossible de supprimer la pizza 'TEST'");
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 

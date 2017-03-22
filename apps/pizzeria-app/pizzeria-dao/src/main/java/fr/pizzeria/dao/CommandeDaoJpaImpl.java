@@ -8,6 +8,7 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 import fr.pizzeria.exception.DaoException;
+import fr.pizzeria.modele.Client;
 import fr.pizzeria.modele.Commande;
 
 public class CommandeDaoJpaImpl implements Dao<Commande, String>  {
@@ -39,7 +40,7 @@ public class CommandeDaoJpaImpl implements Dao<Commande, String>  {
 	@Override
 	public void update(String numero, Commande commande) throws DaoException {
 		EntityManager em = emf.createEntityManager();
-		commande.setId(getByNumero(numero, em).getId());
+		commande.setId(get(numero, em).getId());
 		em.getTransaction().begin();
 		em.merge(commande);
 		em.getTransaction().commit();
@@ -49,17 +50,25 @@ public class CommandeDaoJpaImpl implements Dao<Commande, String>  {
 	@Override
 	public void delete(String numero) throws DaoException {
 		EntityManager em = emf.createEntityManager();
-		Commande commande = getByNumero(numero, em);
+		Commande commande = get(numero, em);
 		em.getTransaction().begin();
 		em.remove(commande);
 		em.getTransaction().commit();
 		em.close();
 	}
 	
-	private Commande getByNumero(String numero, EntityManager em) {
+	private Commande get(String numero, EntityManager em) {
 		TypedQuery<Commande> query = em.createQuery("select c from Commande c where c.numero = :numero", Commande.class);
 		query.setParameter("numero", numero);
 		Commande commande = query.getSingleResult();
+		return commande;
+	}
+	
+	@Override
+	public Commande get(String numero) throws DaoException {
+		EntityManager em = emf.createEntityManager();
+		Commande commande = get(numero, em);
+		em.close();
 		return commande;
 	}
 

@@ -16,24 +16,11 @@ import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.modele.CategoriePizza;
 import fr.pizzeria.modele.Pizza;
 
-/**
- * Servlet implementation class PizzaServletWebApi
- */
 public class PizzaServletWebApi extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	Logger logger = Logger.getLogger(this.getClass().getName());
 	private static Dao<Pizza, String> pizzaDao = new PizzaDaoJpaImpl();
 
-    /**
-     * Default constructor. 
-     */
-    public PizzaServletWebApi() {
-    	
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			List<Pizza> pizzas = pizzaDao.findAll();
@@ -45,9 +32,6 @@ public class PizzaServletWebApi extends HttpServlet {
 		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			Pizza pizza = new Pizza("TEST", "Servlet", 9.90, CategoriePizza.VIANDE);

@@ -12,6 +12,7 @@ import javax.persistence.TypedQuery;
 import org.apache.commons.collections4.ListUtils;
 
 import fr.pizzeria.exception.DaoException;
+import fr.pizzeria.modele.Commande;
 import fr.pizzeria.modele.Pizza;
 
 public class PizzaDaoJpaImpl implements Dao<Pizza, String> {
@@ -43,7 +44,7 @@ public class PizzaDaoJpaImpl implements Dao<Pizza, String> {
 	@Override
 	public void update(String code, Pizza pizza) throws DaoException {
 		EntityManager em = emf.createEntityManager();
-		pizza.setId(getByCode(code, em).getId());
+		pizza.setId(get(code, em).getId());
 		em.getTransaction().begin();
 		em.merge(pizza);
 		em.getTransaction().commit();
@@ -53,7 +54,7 @@ public class PizzaDaoJpaImpl implements Dao<Pizza, String> {
 	@Override
 	public void delete(String code) throws DaoException {
 		EntityManager em = emf.createEntityManager();
-		Pizza pizza = getByCode(code, em);
+		Pizza pizza = get(code, em);
 		em.getTransaction().begin();
 		em.remove(pizza);
 		em.getTransaction().commit();
@@ -82,10 +83,18 @@ public class PizzaDaoJpaImpl implements Dao<Pizza, String> {
 		em.close();
 	}
 
-	private Pizza getByCode(String code, EntityManager em) {
+	private Pizza get(String code, EntityManager em) {
 		TypedQuery<Pizza> query = em.createNamedQuery("pizza.getById", Pizza.class);
 		query.setParameter("code", code);
 		Pizza pizza = query.getSingleResult();
+		return pizza;
+	}
+	
+	@Override
+	public Pizza get(String numero) throws DaoException {
+		EntityManager em = emf.createEntityManager();
+		Pizza pizza = get(numero, em);
+		em.close();
 		return pizza;
 	}
 

@@ -39,7 +39,7 @@ public class ClientDaoJpaImpl implements Dao<Client, String>  {
 	@Override
 	public void update(String email, Client client) throws DaoException {
 		EntityManager em = emf.createEntityManager();
-		client.setId(getByEmail(email, em).getId());
+		client.setId(get(email, em).getId());
 		em.getTransaction().begin();
 		em.merge(client);
 		em.getTransaction().commit();
@@ -49,17 +49,25 @@ public class ClientDaoJpaImpl implements Dao<Client, String>  {
 	@Override
 	public void delete(String email) throws DaoException {
 		EntityManager em = emf.createEntityManager();
-		Client client = getByEmail(email, em);
+		Client client = get(email, em);
 		em.getTransaction().begin();
 		em.remove(client);
 		em.getTransaction().commit();
 		em.close();
 	}
 	
-	private Client getByEmail(String email, EntityManager em) {
+	private Client get(String email, EntityManager em) {
 		TypedQuery<Client> query = em.createQuery("select c from Client c where c.email = :email", Client.class);
 		query.setParameter("email", email);
 		Client client = query.getSingleResult();
+		return client;
+	}
+
+	@Override
+	public Client get(String email) throws DaoException {
+		EntityManager em = emf.createEntityManager();
+		Client client = get(email, em);
+		em.close();
 		return client;
 	}
 

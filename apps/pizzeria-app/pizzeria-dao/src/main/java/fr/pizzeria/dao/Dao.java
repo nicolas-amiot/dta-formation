@@ -13,5 +13,8 @@ public interface Dao<T, E> {
 	default void importData(Dao<T, E> source) throws DaoException{
 		System.out.println("Aucun import possible avec cette implémentation");
 	}
+	default T get(E code) throws DaoException{
+		return null;
+	}
 
 }

@@ -20,7 +20,7 @@
 	                <input class="form-control" type="text" name="categorie" id="categorie" placeholder="Catégorie" value="${pizza.categorie}" /><br><br>
 	                <input class="form-control" type="text" name="image" id="image" placeholder="Url de l'image" value="${pizza.url}" /><br><br>
 	                <div class="container-btn">
-	                	<input class="btn btn-success" type="submit" value="Modifier" />
+	                	<input class="btn btn-success btn-right" type="submit" value="Modifier" />
 	                </div>
 	            </form>
 	        </div>

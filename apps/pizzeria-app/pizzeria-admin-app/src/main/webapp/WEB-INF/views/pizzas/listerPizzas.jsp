@@ -18,9 +18,8 @@
 		            <a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list"></span>List</a>
 		            <a href="#" id="grid" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th"></span>Grid</a>
 		        </div>
-		        <div class="btn-group">
-		            <a href="<c:url value='/pizzas/new'/>" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus"></span>Ajouter une pizza</a>
-		        </div>
+		        <a href="<c:url value='/pizzas/new'/>" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus"></span>Ajouter une pizza</a>
+		      	<a href="<c:url value='/logout'/>" class="btn btn-danger btn-sm btn-right"><span class="glyphicon glyphicon-off"></span>Deconnexion</a>
 		    </div>
 		    <div id="products" class="row list-group">
 				<c:forEach var="pizza" items="${pizzas}">

@@ -84,16 +84,16 @@ public class PizzaDaoJpaImpl implements Dao<Pizza, String> {
 	}
 
 	private Pizza get(String code, EntityManager em) {
-		TypedQuery<Pizza> query = em.createNamedQuery("pizza.getById", Pizza.class);
+		TypedQuery<Pizza> query = em.createNamedQuery("pizza.getByCode", Pizza.class);
 		query.setParameter("code", code);
 		Pizza pizza = query.getSingleResult();
 		return pizza;
 	}
 	
 	@Override
-	public Pizza get(String numero) throws DaoException {
+	public Pizza get(String code) throws DaoException {
 		EntityManager em = emf.createEntityManager();
-		Pizza pizza = get(numero, em);
+		Pizza pizza = get(code, em);
 		em.close();
 		return pizza;
 	}

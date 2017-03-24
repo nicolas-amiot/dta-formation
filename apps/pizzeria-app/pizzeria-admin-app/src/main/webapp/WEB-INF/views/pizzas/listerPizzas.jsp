@@ -18,8 +18,8 @@
 		            <a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list"></span>List</a>
 		            <a href="#" id="grid" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th"></span>Grid</a>
 		        </div>
-		        <a href="<c:url value='/pizzas/new'/>" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus"></span>Ajouter une pizza</a>
-		      	<a href="<c:url value='/logout'/>" class="btn btn-danger btn-sm btn-right"><span class="glyphicon glyphicon-off"></span>Deconnexion</a>
+		        <a href="<c:url value='/pizzas/new'/>" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span>Ajouter une pizza</a>
+		      	<a href="<c:url value='/logout'/>" class="btn btn-primary btn-sm btn-right"><span class="glyphicon glyphicon-off"></span>Deconnexion</a>
 		    </div>
 		    <div id="products" class="row list-group">
 				<c:forEach var="pizza" items="${pizzas}">
@@ -30,8 +30,8 @@
 			                    <h4 class="group inner list-group-item-heading">${pizza.nom} (${pizza.code})</h4>
 			                    <p class="group inner list-group-item-text">${pizza.categorie.libelle}</p>
 			                    <p class="lead"><fmt:formatNumber type="currency" currencySymbol="EUR" minFractionDigits="2" value="${pizza.prix}" /></p>
-			                    <a class="btn btn-success" href="<c:url value='/pizzas/edit?code=${pizza.code}'/>">Modifier</a>
-			                    <a class="btn btn-success" href="<c:url value='/pizzas/remove?code=${pizza.code}'/>">Supprimer</a>
+			                    <a class="btn btn-warning" href="<c:url value='/pizzas/edit?code=${pizza.code}'/>"><span class="glyphicon glyphicon-pencil"></span>Modifier</a>
+			                    <a class="btn btn-danger" href="<c:url value='/pizzas/remove?code=${pizza.code}'/>"><span class="glyphicon glyphicon-remove"></span>Supprimer</a>
 			                </div>
 			            </div>
 			        </div>

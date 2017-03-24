@@ -27,8 +27,8 @@
 			<artifactId>nicolas-pizzeria-dao</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.mariadb.jdbc</groupId>

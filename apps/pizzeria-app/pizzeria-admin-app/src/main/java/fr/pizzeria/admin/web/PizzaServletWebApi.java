@@ -5,12 +5,14 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.pizzeria.admin.metier.PizzaService;
 import fr.pizzeria.dao.Dao;
 import fr.pizzeria.dao.PizzaDaoJpaImpl;
 import fr.pizzeria.exception.DaoException;
@@ -21,11 +23,11 @@ import fr.pizzeria.modele.Pizza;
 public class PizzaServletWebApi extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	Logger logger = Logger.getLogger(this.getClass().getName());
-	private static Dao<Pizza, String> pizzaDao = new PizzaDaoJpaImpl();
+	@Inject private PizzaService pizzaService;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			List<Pizza> pizzas = pizzaDao.findAll();
+			List<Pizza> pizzas = pizzaService.findAll();
 			for(Pizza pizza : pizzas){
 				response.getWriter().append(pizza.toString()+"\n");
 			}
@@ -37,7 +39,7 @@ public class PizzaServletWebApi extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			Pizza pizza = new Pizza("TEST", "Servlet", 9.90, CategoriePizza.VIANDE);
-			pizzaDao.save(pizza);
+			pizzaService.save(pizza);
 			response.getWriter().print("Ajout de la pizza réussi");
 		} catch (DaoException e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
@@ -50,7 +52,7 @@ public class PizzaServletWebApi extends HttpServlet {
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			Pizza pizza = new Pizza("TEST2", "Servlet", 9.90, CategoriePizza.VIANDE);
-			pizzaDao.update("TEST", pizza);
+			pizzaService.update("TEST", pizza);
 			response.getWriter().print("Modification de la pizza réussi");
 		} catch (DaoException e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
@@ -62,7 +64,7 @@ public class PizzaServletWebApi extends HttpServlet {
 	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			pizzaDao.delete("TEST");
+			pizzaService.delete("TEST");
 			response.getWriter().print("Suppression de la pizza réussi");
 		} catch (DaoException e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);

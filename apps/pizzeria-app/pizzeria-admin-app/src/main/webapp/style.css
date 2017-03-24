@@ -69,6 +69,12 @@
 
 .well.well-sm{
 	margin-top: 10px;
+	overflow: auto;
+}
+
+.well.well-sm .btn{
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 .span3.well .container-btn {
@@ -77,6 +83,12 @@
 
 .btn-right{
 	float: right;
+}
+
+@media only screen and (max-width : 767px) {
+	.btn-right{
+		float: none;
+	}
 }
 
 #login {

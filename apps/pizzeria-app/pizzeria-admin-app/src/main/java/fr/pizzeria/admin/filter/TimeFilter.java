@@ -14,19 +14,14 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.collections4.map.HashedMap;
 
-@WebFilter(urlPatterns = "/*")
-public class TImeFilter implements Filter {
+@WebFilter("/*")
+public class TimeFilter implements Filter {
 
 	private FilterConfig config = null;
 
 	@Override
 	public void init(FilterConfig config) throws ServletException {
 		this.config = config;
-		config.getServletContext().log("TimerFilter initialized");
-	}
-
-	@Override
-	public void destroy() {
 	}
 
 	@Override
@@ -43,6 +38,10 @@ public class TImeFilter implements Filter {
 		}
 		tempsRequetes.put(path, temps);
 		config.getServletContext().setAttribute("tempsRequetes", tempsRequetes);
+	}
+	
+	@Override
+	public void destroy() {
 	}
 
 }

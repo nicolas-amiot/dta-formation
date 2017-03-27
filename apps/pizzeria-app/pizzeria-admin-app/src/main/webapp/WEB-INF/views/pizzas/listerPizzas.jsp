@@ -6,7 +6,7 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>Bienvenue sur le site web de la pizzÃ©ria "La Florentina"</title>
+        <title>Bienvenue sur le site web de la pizzéria "La Florentina"</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="<c:url value='/style.css'/>">
     </head>

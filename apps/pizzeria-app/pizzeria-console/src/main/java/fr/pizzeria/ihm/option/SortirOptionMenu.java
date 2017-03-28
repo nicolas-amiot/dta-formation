@@ -1,6 +1,8 @@
 package fr.pizzeria.ihm.option;
 
+import org.springframework.stereotype.Controller;
 
+@Controller
 public class SortirOptionMenu extends OptionMenu {
 
 	public SortirOptionMenu() {

@@ -4,16 +4,22 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Controller;
+
 import fr.pizzeria.dao.Dao;
 import fr.pizzeria.exception.*;
 import fr.pizzeria.modele.Pizza;
 
+@Controller
 public class AjouterPizzaOptionMenu extends OptionMenu {
 	
 	private Dao<Pizza, String> pizzaDao;
 	private Scanner scanner;
 
-	public AjouterPizzaOptionMenu(Dao<Pizza, String> pizzaDao, Scanner scanner) {
+	@Autowired
+	public AjouterPizzaOptionMenu(@Qualifier("pizzaDao") Dao<Pizza, String> pizzaDao, Scanner scanner) {
 		super("Ajouter une nouvelle pizza");
 		this.pizzaDao = pizzaDao;
 		this.scanner = scanner;

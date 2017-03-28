@@ -5,15 +5,21 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Controller;
+
 import fr.pizzeria.dao.Dao;
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.modele.Pizza;
 
+@Controller
 public class AfficherPizzaUltime extends OptionMenu {
 	
 	private Dao<Pizza, String> pizzaDao;
 
-	public AfficherPizzaUltime(Dao<Pizza, String> pizzaDao) {
+	@Autowired
+	public AfficherPizzaUltime(@Qualifier("pizzaDao") Dao<Pizza, String> pizzaDao) {
 		super("Afficher la pizza la plus cher");
 		this.pizzaDao = pizzaDao;
 	}

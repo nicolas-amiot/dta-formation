@@ -7,7 +7,6 @@
 	<import resource="dao-memoire-config.xml"/>
 
 	<bean id="menu" class="fr.pizzeria.ihm.menu.Menu">
-		<constructor-arg value="***** Pizzeria Administration *****"></constructor-arg>
 		<constructor-arg>
 			<map>
 				<entry key="1" value-ref="menuListAll" />

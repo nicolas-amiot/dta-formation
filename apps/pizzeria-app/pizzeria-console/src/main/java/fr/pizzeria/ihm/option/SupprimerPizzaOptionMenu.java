@@ -5,16 +5,22 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Controller;
+
 import fr.pizzeria.dao.Dao;
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.modele.Pizza;
 
+@Controller
 public class SupprimerPizzaOptionMenu  extends OptionMenu {
 	
 	private Dao<Pizza, String> pizzaDao;
 	private Scanner scanner;
 
-	public SupprimerPizzaOptionMenu(Dao<Pizza, String> pizzaDao, Scanner scanner) {
+	@Autowired
+	public SupprimerPizzaOptionMenu(@Qualifier("pizzaDao") Dao<Pizza, String> pizzaDao, Scanner scanner) {
 		super("Supprimer une pizza");
 		this.pizzaDao = pizzaDao;
 		this.scanner = scanner;

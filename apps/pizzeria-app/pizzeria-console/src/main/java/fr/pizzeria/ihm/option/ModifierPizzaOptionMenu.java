@@ -1,59 +1,45 @@
 package fr.pizzeria.ihm.option;
 
 import java.util.List;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import fr.pizzeria.dao.Dao;
 import fr.pizzeria.exception.DaoException;
-import fr.pizzeria.ihm.tools.IhmTools;
 import fr.pizzeria.modele.Pizza;
 
 public class ModifierPizzaOptionMenu extends OptionMenu {
+	
+	private Dao<Pizza, String> pizzaDao;
+	private Scanner scanner;
 
-	public ModifierPizzaOptionMenu() {
+	public ModifierPizzaOptionMenu(Dao<Pizza, String> pizzaDao, Scanner scanner) {
 		super("Mettre à jour une pizza");
+		this.pizzaDao = pizzaDao;
+		this.scanner = scanner;
 	}
 
 	@Override
-	public boolean execute(IhmTools ihmTools) {
+	public boolean execute() {
 		try{
-			List<Pizza> pizzas = ihmTools.getPizzaDao().findAll();
+			List<Pizza> pizzas = pizzaDao.findAll();
 			this.afficherPizzas(pizzas);
-			boolean fini = false;
-			while(!fini){
-				int index = 0;
+			Pizza pizza = null;
+			while(pizza == null){
 				System.out.println("Veuillez choisir la pizza à modifier (stop pour abandonner).");
-				String codeChoisi = ihmTools.getScanner().next();
-				if(!"stop".equals(codeChoisi)){
-					while(index < pizzas.size() && !fini){
-						if(codeChoisi.equals(pizzas.get(index).getCode())){
-							fini = true;
-						} else {
-							index++;
-						}
-					}
-					if(fini){
-						boolean codeDispo;
-						do{
-							Pizza pizza = this.saisirPizza(ihmTools.getScanner());
-							codeDispo = true;
-							for(int i = 0; i < pizzas.size(); i++){
-								if(pizza.getCode().equals(pizzas.get(i).getCode()) && i != index){
-									codeDispo = false;
-									i = pizzas.size();
-								}
-							}
-							if(codeDispo){
-								ihmTools.getPizzaDao().update(codeChoisi, pizza);
-							} else {
-								System.out.println("Le code " + pizza.getCode() + " n'est pas disponible");
-							}
-						} while(!codeDispo);
+				String code = scanner.next();
+				pizza = pizzaDao.get(code);
+				if(pizza != null){
+					pizza = this.saisirPizza(scanner);
+					if(code.equals(pizza.getCode()) || pizzaDao.get(pizza.getCode()) == null){
+						pizzaDao.update(code, pizza);
 					} else {
-						System.out.println("Cette pizza n'existe pas.");
+						System.out.println("Le code " + pizza.getCode() + " n'est pas disponible");
+						pizza = null;
 					}
 				} else {
-					fini = true;
+					System.out.println("Cette pizza n'existe pas.");
 				}
 			}
 		} catch (DaoException e) {

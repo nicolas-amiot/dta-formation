@@ -2,20 +2,20 @@ package fr.pizzeria.ihm.menu;
 
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Scanner;
 
 import fr.pizzeria.ihm.option.OptionMenu;
-import fr.pizzeria.ihm.tools.IhmTools;
 
 public class Menu {
 	
 	private String titre;
 	private Map<Integer, OptionMenu> actions;
-	private IhmTools ihmTools;
+	private Scanner scanner;
 	
-	public Menu(IhmTools ihmTools, String titre, Map<Integer, OptionMenu> actions) {
-		this.ihmTools = ihmTools;
+	public Menu(String titre, Map<Integer, OptionMenu> actions, Scanner scanner) {
 		this.titre = titre;
 		this.actions = actions;
+		this.scanner = scanner;
 	}
 
 	public void afficher() {
@@ -30,10 +30,10 @@ public class Menu {
 		boolean termine = false;
 		do {
 			this.afficher();
-			choix = ihmTools.getScanner().nextInt();
+			choix = scanner.nextInt();
 			OptionMenu action = actions.get(choix);
 			if(action != null){
-				termine = action.execute(ihmTools);
+				termine = action.execute();
 			}
 		} while(!termine);
 	}

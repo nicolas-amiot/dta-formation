@@ -59,8 +59,11 @@ public class ClientDaoJpaImpl implements Dao<Client, String>  {
 	private Client get(String email, EntityManager em) {
 		TypedQuery<Client> query = em.createQuery("select c from Client c where c.email = :email", Client.class);
 		query.setParameter("email", email);
-		Client client = query.getSingleResult();
-		return client;
+		List<Client> clients = query.getResultList();
+		if(!clients.isEmpty()){
+		    return clients.get(0);
+		}
+		return null;
 	}
 
 	@Override

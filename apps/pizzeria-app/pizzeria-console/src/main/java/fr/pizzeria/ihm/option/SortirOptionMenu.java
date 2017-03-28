@@ -1,6 +1,5 @@
 package fr.pizzeria.ihm.option;
 
-import fr.pizzeria.ihm.tools.IhmTools;
 
 public class SortirOptionMenu extends OptionMenu {
 
@@ -9,7 +8,7 @@ public class SortirOptionMenu extends OptionMenu {
 	}
 
 	@Override
-	public boolean execute(IhmTools ihmTools) {
+	public boolean execute() {
 		System.out.println("Fin du programme.");
 		return true;
 	}

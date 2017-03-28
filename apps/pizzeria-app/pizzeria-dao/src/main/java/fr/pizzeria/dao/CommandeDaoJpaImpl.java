@@ -8,7 +8,6 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 import fr.pizzeria.exception.DaoException;
-import fr.pizzeria.modele.Client;
 import fr.pizzeria.modele.Commande;
 
 public class CommandeDaoJpaImpl implements Dao<Commande, String>  {
@@ -60,8 +59,11 @@ public class CommandeDaoJpaImpl implements Dao<Commande, String>  {
 	private Commande get(String numero, EntityManager em) {
 		TypedQuery<Commande> query = em.createQuery("select c from Commande c where c.numero = :numero", Commande.class);
 		query.setParameter("numero", numero);
-		Commande commande = query.getSingleResult();
-		return commande;
+		List<Commande> commandes = query.getResultList();
+		if(!commandes.isEmpty()){
+		    return commandes.get(0);
+		}
+		return null;
 	}
 	
 	@Override

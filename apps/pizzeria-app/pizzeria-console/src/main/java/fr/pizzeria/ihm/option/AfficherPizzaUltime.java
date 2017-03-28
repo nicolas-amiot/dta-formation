@@ -5,20 +5,23 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import fr.pizzeria.dao.Dao;
 import fr.pizzeria.exception.DaoException;
-import fr.pizzeria.ihm.tools.IhmTools;
 import fr.pizzeria.modele.Pizza;
 
 public class AfficherPizzaUltime extends OptionMenu {
+	
+	private Dao<Pizza, String> pizzaDao;
 
-	public AfficherPizzaUltime() {
+	public AfficherPizzaUltime(Dao<Pizza, String> pizzaDao) {
 		super("Afficher la pizza la plus cher");
+		this.pizzaDao = pizzaDao;
 	}
 
 	@Override
-	public boolean execute(IhmTools ihmTools) {
+	public boolean execute() {
 		try {
-			List<Pizza> pizzas = ihmTools.getPizzaDao().findAll();
+			List<Pizza> pizzas = pizzaDao.findAll();
 			Pizza pizza = pizzas.stream().max(Comparator.comparing(Pizza::getPrix)).get();
 			System.out.println(pizza);
 		} catch (DaoException e) {

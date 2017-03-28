@@ -5,20 +5,23 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import fr.pizzeria.dao.Dao;
 import fr.pizzeria.exception.DaoException;
-import fr.pizzeria.ihm.tools.IhmTools;
 import fr.pizzeria.modele.Pizza;
 
 public class ListerPizzasCategorieOptionMenu extends OptionMenu {
+	
+	private Dao<Pizza, String> pizzaDao;
 
-	public ListerPizzasCategorieOptionMenu() {
+	public ListerPizzasCategorieOptionMenu(Dao<Pizza, String> pizzaDao) {
 		super("Lister les pizzas par catégorie");
+		this.pizzaDao = pizzaDao;
 	}
 
 	@Override
-	public boolean execute(IhmTools ihmTools) {
+	public boolean execute() {
 		try {
-			List<Pizza> pizzas = ihmTools.getPizzaDao().findAll();
+			List<Pizza> pizzas = pizzaDao.findAll();
 			pizzas.stream().collect(Collectors.groupingBy(Pizza::getCategorie)).forEach((cat, piz) -> {
 				System.out.println("Dans la categorie " + cat + ":");
 				this.afficherPizzas(piz);

@@ -1,39 +1,37 @@
 package fr.pizzeria.ihm.option;
 
-import java.util.List;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import fr.pizzeria.dao.Dao;
 import fr.pizzeria.exception.*;
-import fr.pizzeria.ihm.tools.IhmTools;
 import fr.pizzeria.modele.Pizza;
 
 public class AjouterPizzaOptionMenu extends OptionMenu {
+	
+	private Dao<Pizza, String> pizzaDao;
+	private Scanner scanner;
 
-	public AjouterPizzaOptionMenu() {
+	public AjouterPizzaOptionMenu(Dao<Pizza, String> pizzaDao, Scanner scanner) {
 		super("Ajouter une nouvelle pizza");
+		this.pizzaDao = pizzaDao;
+		this.scanner = scanner;
 	}
 
 	@Override
-	public boolean execute(IhmTools ihmTools) {
-		List<Pizza> pizzas;
+	public boolean execute() {
 		try {
-			pizzas = ihmTools.getPizzaDao().findAll();
-			boolean codeDispo = true;
-			do{
-				Pizza pizza = this.saisirPizza(ihmTools.getScanner());
-				for(int i = 0; i < pizzas.size(); i++){
-					if(pizza.getCode().equals(pizzas.get(i).getCode())){
-						codeDispo = false;
-						i = pizzas.size();
-					}
-				}
-				if(codeDispo){
-					ihmTools.getPizzaDao().save(pizza);
+			Pizza pizza = null;
+			while(pizza == null){
+				pizza = this.saisirPizza(scanner);
+				if(pizzaDao.get(pizza.getCode()) == null){
+					pizzaDao.save(pizza);
 				} else {
 					System.out.println("Le code " + pizza.getCode() + " n'est pas disponible");
+					pizza = null;
 				}
-			} while(!codeDispo);
+			}
 		} catch (DaoException e) {
 			Logger logger = Logger.getLogger(this.getClass().getName());
 			logger.log(Level.SEVERE, e.getMessage(), e);

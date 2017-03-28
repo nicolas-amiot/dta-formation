@@ -12,7 +12,6 @@ import javax.persistence.TypedQuery;
 import org.apache.commons.collections4.ListUtils;
 
 import fr.pizzeria.exception.DaoException;
-import fr.pizzeria.modele.Commande;
 import fr.pizzeria.modele.Pizza;
 
 public class PizzaDaoJpaImpl implements Dao<Pizza, String> {
@@ -86,8 +85,11 @@ public class PizzaDaoJpaImpl implements Dao<Pizza, String> {
 	private Pizza get(String code, EntityManager em) {
 		TypedQuery<Pizza> query = em.createNamedQuery("pizza.getByCode", Pizza.class);
 		query.setParameter("code", code);
-		Pizza pizza = query.getSingleResult();
-		return pizza;
+		List<Pizza> pizzas = query.getResultList();
+		if(!pizzas.isEmpty()){
+		    return pizzas.get(0);
+		}
+		return null;
 	}
 	
 	@Override

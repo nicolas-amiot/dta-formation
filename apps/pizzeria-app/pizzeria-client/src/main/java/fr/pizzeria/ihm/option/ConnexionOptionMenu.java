@@ -24,15 +24,10 @@ public class ConnexionOptionMenu extends OptionMenu {
 		System.out.println("Votre mot de passe:");
 		String password = ihmTools.getScanner().next();
 		try {
-			List<Client> clients = ihmTools.getClientDao().findAll();
-			for(Client client : clients){
-				if(client.getEmail().equals(email)){
-					if(client.getPassword().equals(DigestUtils.md5Hex(password))){
-						ihmTools.setClient(client);
-						MenuPrincipal.MenuClient();
-					}
-					break;
-				}
+			Client client = ihmTools.getClientDao().get(email);
+			if (client != null && client.getPassword().equals(DigestUtils.md5Hex(password))) {
+				ihmTools.setClient(client);
+				MenuPrincipal.MenuClient();
 			}
 		} catch (DaoException e) {
 			Logger logger = Logger.getLogger(this.getClass().getName());

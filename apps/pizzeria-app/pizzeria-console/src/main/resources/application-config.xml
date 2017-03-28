@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
+
+	<import resource="dao-memoire-config.xml"/>
+
+	<bean id="menu" class="fr.pizzeria.ihm.menu.Menu">
+		<constructor-arg value="***** Pizzeria Administration *****"></constructor-arg>
+		<constructor-arg>
+			<map>
+				<entry key="1" value-ref="menuListAll" />
+				<entry key="2" value-ref="menuAdd" />
+				<entry key="3" value-ref="menuUpdate" />
+				<entry key="4" value-ref="menuRemove" />
+				<entry key="5" value-ref="menuListCategorie" />
+				<entry key="6" value-ref="menuUltime" />
+				<entry key="7" value-ref="menuImport" />
+				<entry key="99" value-ref="menuSortir" />
+			</map>
+		</constructor-arg>
+		<constructor-arg ref="scanner"></constructor-arg>
+	</bean>
+
+	<bean id="menuListAll" class="fr.pizzeria.ihm.option.ListerPizzasMenuOption">
+		<constructor-arg ref="dao"></constructor-arg>
+	</bean>
+	<bean id="menuAdd" class="fr.pizzeria.ihm.option.AjouterPizzaOptionMenu">
+		<constructor-arg ref="dao"></constructor-arg>
+		<constructor-arg ref="scanner"></constructor-arg>
+	</bean>
+	<bean id="menuUpdate" class="fr.pizzeria.ihm.option.ModifierPizzaOptionMenu">
+		<constructor-arg ref="dao"></constructor-arg>
+		<constructor-arg ref="scanner"></constructor-arg>
+	</bean>
+	<bean id="menuRemove" class="fr.pizzeria.ihm.option.SupprimerPizzaOptionMenu">
+		<constructor-arg ref="dao"></constructor-arg>
+		<constructor-arg ref="scanner"></constructor-arg>
+	</bean>
+	<bean id="menuListCategorie" class="fr.pizzeria.ihm.option.ListerPizzasCategorieOptionMenu">
+		<constructor-arg ref="dao"></constructor-arg>
+	</bean>
+	<bean id="menuUltime" class="fr.pizzeria.ihm.option.AfficherPizzaUltime">
+		<constructor-arg ref="dao"></constructor-arg>
+	</bean>
+	<bean id="menuImport" class="fr.pizzeria.ihm.option.ImporterPizzaOptionMenu">
+		<constructor-arg ref="dao"></constructor-arg>
+		<constructor-arg ref="sourceDao"></constructor-arg>
+	</bean>
+	<bean id="menuSortir" class="fr.pizzeria.ihm.option.SortirOptionMenu"></bean>
+	
+	<bean id="scanner" class="java.util.Scanner">
+		<constructor-arg>
+			<util:constant id="scanner" static-field="java.lang.System.in" />
+		</constructor-arg>
+	</bean>
+
+</beans>

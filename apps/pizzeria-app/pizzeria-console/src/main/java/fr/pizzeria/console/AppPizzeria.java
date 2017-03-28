@@ -1,16 +1,17 @@
 package fr.pizzeria.console;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import fr.pizzeria.ihm.menu.Menu;
-import fr.pizzeria.ihm.menu.MenuPrincipal;
-import fr.pizzeria.ihm.tools.IhmTools;
 
 public class AppPizzeria {
 	
 	public static void main(String[] args) {
-		IhmTools ihmTools = new IhmTools();
-		Menu menu = new MenuPrincipal(ihmTools);
+		ApplicationContext context = new ClassPathXmlApplicationContext("application-config.xml");
+		Menu menu = context.getBean(Menu.class);
+		menu.afficher();
 		menu.demmarer();
-		ihmTools.close();
 	}
 
 }

@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-import fr.pizzeria.ihm.tools.IhmTools;
 import fr.pizzeria.modele.CategoriePizza;
 import fr.pizzeria.modele.Pizza;
 
@@ -20,7 +19,7 @@ public abstract class OptionMenu {
 		return libelle;
 	}
 	
-	public abstract boolean execute(IhmTools ihmTools);
+	public abstract boolean execute();
 	
 	public void afficherPizzas(List<Pizza> pizzas){
 		pizzas.forEach(System.out::println);

@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ public class PizzaDaoTest {
 	@Qualifier("pizzaDao")
 	private Dao<Pizza, String> pizzaDao;
 	
+	@Ignore
 	@Test
 	public void testFindAll(){
 		List<Pizza> pizzas = null;
@@ -35,6 +37,7 @@ public class PizzaDaoTest {
 		assertTrue(pizzas != null);
 	}
 	
+	@Ignore
 	@Test
 	public void testUpdate(){
 		Pizza pizza = null;

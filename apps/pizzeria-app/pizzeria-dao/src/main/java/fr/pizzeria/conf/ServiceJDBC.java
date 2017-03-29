@@ -1,4 +1,4 @@
-package fr.pizzeria.jdbc;
+package fr.pizzeria.conf;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

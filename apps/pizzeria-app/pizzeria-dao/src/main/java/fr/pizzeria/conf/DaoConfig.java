@@ -1,4 +1,4 @@
-package fr.pizzeria.jdbc;
+package fr.pizzeria.conf;
 
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -8,8 +8,13 @@ import javax.sql.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
+@EnableTransactionManagement
 public class DaoConfig {
 
 	@Bean
@@ -25,6 +30,18 @@ public class DaoConfig {
 		ds.setPassword(password);
 		ds.setUrl(url);
 		return ds;
+	}
+	
+	@Bean
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws SQLException{
+	    LocalContainerEntityManagerFactoryBean factory =  new LocalContainerEntityManagerFactoryBean();
+	    factory.setPersistenceUnitName("nicolas-pizzeria-console"); /* Optional if you have only one persistence */
+	    return factory;
+	}
+	
+	@Bean
+	public PlatformTransactionManager txManager(){
+		return new JpaTransactionManager();
 	}
 
 }

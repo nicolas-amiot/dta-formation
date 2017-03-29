@@ -10,10 +10,11 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
+import fr.pizzeria.conf.DaoConfig;
 import fr.pizzeria.dao.Dao;
 import fr.pizzeria.dao.PizzaDaoFichierImpl;
 import fr.pizzeria.dao.PizzaDaoSpringJdbcImpl;
-import fr.pizzeria.jdbc.DaoConfig;
+import fr.pizzeria.dao.PizzaDaoSpringJpaImpl;
 import fr.pizzeria.modele.Pizza;
 
 @Configuration
@@ -23,8 +24,8 @@ public class PizzeriaAppSpringConfig {
 	
 	@Bean
 	@Qualifier("pizzaDao")
-	public Dao<Pizza, String> pizzaDao(DataSource dataSource) {
-		return new PizzaDaoSpringJdbcImpl(dataSource);
+	public Dao<Pizza, String> pizzaDao() {
+		return new PizzaDaoSpringJpaImpl();
 	}
 
 	@Bean

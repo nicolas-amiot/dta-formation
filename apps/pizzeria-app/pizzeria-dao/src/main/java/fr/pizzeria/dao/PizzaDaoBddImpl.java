@@ -11,12 +11,12 @@ import java.util.logging.Logger;
 
 import org.apache.commons.collections4.ListUtils;
 
+import fr.pizzeria.conf.ServiceJDBC;
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.exception.DeleteDaoException;
 import fr.pizzeria.exception.SaveDaoException;
 import fr.pizzeria.exception.SelectDaoException;
 import fr.pizzeria.exception.UpdateDaoException;
-import fr.pizzeria.jdbc.ServiceJDBC;
 import fr.pizzeria.modele.CategoriePizza;
 import fr.pizzeria.modele.Pizza;
 

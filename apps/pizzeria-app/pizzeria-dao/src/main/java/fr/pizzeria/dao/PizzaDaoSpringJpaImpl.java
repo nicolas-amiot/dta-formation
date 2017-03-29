@@ -1,21 +1,24 @@
-package fr.pizzeria.admin.metier;
+package fr.pizzeria.dao;
 
 import java.util.List;
 
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.modele.Pizza;
 
-@Stateless
-public class PizzaServiceEJB {
+@Repository
+@Transactional
+public class PizzaDaoSpringJpaImpl implements Dao<Pizza, String> {
 	
 	@PersistenceContext
 	private EntityManager em;
-	
+
 	public List<Pizza> findAll() throws DaoException {
 		TypedQuery<Pizza> query = em.createNamedQuery("pizza.findAllPizzas", Pizza.class);
 		List<Pizza> pizzas = query.getResultList();

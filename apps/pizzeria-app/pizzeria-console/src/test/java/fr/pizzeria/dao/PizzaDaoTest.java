@@ -42,14 +42,29 @@ public class PizzaDaoTest {
 	public void testUpdate(){
 		Pizza pizza = null;
 		try {
-			pizzaDao.save(new Pizza("TEST", "Pizza test", 8.90, CategoriePizza.SANS_VIANDE));
-			pizzaDao.update("TEST", new Pizza("TEST", "Pizza test 2", 8.90, CategoriePizza.SANS_VIANDE));
+			pizzaDao.save(new Pizza("TEST", "Test 1", 8.90, CategoriePizza.SANS_VIANDE));
+			pizzaDao.update("TEST", new Pizza("TEST", "Test 2", 8.90, CategoriePizza.SANS_VIANDE));
 			pizza = pizzaDao.get("TEST");
 			pizzaDao.delete("TEST");
 		} catch (DaoException e) {
 			e.printStackTrace();
 		}
 		assertTrue(pizza != null && "Pizza test 2".equals(pizza.getNom()));
+	}
+	
+	@Ignore
+	@Test
+	public void testAOP(){
+		Pizza pizza = null;
+		try {
+			pizzaDao.save(new Pizza(null, "Test 1", 8.90, CategoriePizza.SANS_VIANDE));
+			pizzaDao.update("TES", new Pizza(null, "Test 2", 8.90, CategoriePizza.SANS_VIANDE));
+			pizza = pizzaDao.get("TES");
+			pizzaDao.delete("TEST");
+		} catch (DaoException e) {
+			e.printStackTrace();
+		}
+		assertTrue(pizza != null);
 	}
 	
 }

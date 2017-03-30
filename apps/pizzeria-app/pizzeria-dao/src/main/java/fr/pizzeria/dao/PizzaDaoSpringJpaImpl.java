@@ -4,49 +4,45 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.modele.Pizza;
+import fr.pizzeria.repos.PizzaRepository;
 
 @Repository
 @Transactional
 public class PizzaDaoSpringJpaImpl implements Dao<Pizza, String> {
 	
+	/* If you don't use the interface who extend JpaRepository */
 	@PersistenceContext
 	private EntityManager em;
+	
+	@Autowired
+	private PizzaRepository pizzaRepository;
 
 	public List<Pizza> findAll() throws DaoException {
-		TypedQuery<Pizza> query = em.createNamedQuery("pizza.findAllPizzas", Pizza.class);
-		List<Pizza> pizzas = query.getResultList();
-		return pizzas;
+		return pizzaRepository.findAll();
 	}
 
 	public void save(Pizza pizza) throws DaoException {
-		em.persist(pizza);
+		pizzaRepository.save(pizza);
 	}
 
 	public void update(String code, Pizza pizza) throws DaoException {
 		pizza.setId(get(code).getId());
-		em.merge(pizza);
+		pizzaRepository.save(pizza);
 	}
 
 	public void delete(String code) throws DaoException {
-		Pizza pizza = get(code);
-		em.remove(pizza);
+		pizzaRepository.delete(code);
 	}
 	
 	public Pizza get(String code) throws DaoException {
-		TypedQuery<Pizza> query = em.createNamedQuery("pizza.getByCode", Pizza.class);
-		query.setParameter("code", code);
-		List<Pizza> pizzas = query.getResultList();
-		if(!pizzas.isEmpty()){
-		    return pizzas.get(0);
-		}
-		return null;
+		return pizzaRepository.findOne(code);
 	}
 
 }

@@ -33,7 +33,7 @@ public class SupprimerPizzaOptionMenu  extends OptionMenu {
 			this.afficherPizzas(pizzas);
 			Pizza pizza = null;
 			while(pizza == null){
-				System.out.println("Veuillez choisir la pizza à supprimer (stop pour abandonner).");
+				System.out.println("Veuillez choisir la pizza à supprimer.");
 				String code = scanner.next();
 				pizza = pizzaDao.get(code);
 				if(pizza != null){

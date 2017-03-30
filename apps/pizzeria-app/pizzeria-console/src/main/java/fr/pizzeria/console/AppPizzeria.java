@@ -10,6 +10,7 @@ public class AppPizzeria {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(PizzeriaAppSpringConfig.class);
 		Menu menu = context.getBean(Menu.class);
 		menu.demmarer();
+		context.close();
 	}
 
 }

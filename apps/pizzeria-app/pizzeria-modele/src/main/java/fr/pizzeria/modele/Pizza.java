@@ -25,10 +25,10 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 })
 public class Pizza implements Serializable {
 
-	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
+	@Id
 	@ToString
 	@Column(length = 255, unique = true)
 	private String code;

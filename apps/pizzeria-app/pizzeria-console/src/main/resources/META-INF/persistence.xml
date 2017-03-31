@@ -7,6 +7,7 @@
 		<class>fr.pizzeria.modele.Livreur</class>
 		<class>fr.pizzeria.modele.Commande</class>
 		<class>fr.pizzeria.modele.CommandePizza</class>
+		<class>fr.pizzeria.modele.Performance</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/pizzeria"/>
 			<property name="javax.persistence.jdbc.user" value="root"/>

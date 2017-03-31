@@ -15,6 +15,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import fr.pizzeria.aop.PerformanceAspect;
 import fr.pizzeria.aop.PizzaAspect;
 
 @Configuration
@@ -53,6 +54,11 @@ public class DaoConfig {
 	@Bean
 	public PizzaAspect pizzaAspect(){
 		return new PizzaAspect();
+	}
+	
+	@Bean
+	public PerformanceAspect performanceAspect(){
+		return new PerformanceAspect();
 	}
 
 }

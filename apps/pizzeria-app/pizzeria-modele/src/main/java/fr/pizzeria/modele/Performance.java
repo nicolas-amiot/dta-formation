@@ -1,11 +1,7 @@
 package fr.pizzeria.modele;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
-
-import javax.persistence.AttributeConverter;
 import javax.persistence.Column;
-import javax.persistence.Converter;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
